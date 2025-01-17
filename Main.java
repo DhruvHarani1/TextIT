@@ -39,7 +39,7 @@ public class Main {
                         SU[totalUser].signUpDetails(SU);
                     }
                     SU[totalUser].display();
-                    SignUp assignID = new SignUp(totalUser + 1);
+                    SU[totalUser].id(totalUser);
                     totalUser++;
                     break;
 
@@ -75,16 +75,6 @@ class SignUp {
 
     // Classes
     Scanner sc = new Scanner(System.in);
-
-    // default constructor to remove errors coming because of the below constructor
-    SignUp() {
-
-    }
-
-    // constructor to give id to all accounts...
-    SignUp(int i) {
-        id = i;
-    }
 
     // Method to take SignUp Details
     public void signUpDetails(SignUp[] SU) {
@@ -134,6 +124,11 @@ class SignUp {
         {
             password = pass;
         }
+    }
+
+    // Method to give id to all users
+    void id(int totalUser) {
+        id = totalUser + 1;
     }
 
     // Method to Grow The array of object of Signup as a New User Comes
