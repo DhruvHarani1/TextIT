@@ -52,7 +52,9 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contact
 For any questions or feedback, feel free to reach out:
-- **Developer**: Dhruv
+- **Developer**: Dhruv , Vraj , jainil , Neel
+- **Designer**: Jainil , Neel
+- **Tester & Helping Hand's**: Ved , Umang
 - **Email**: dhruvharani5@gmail.com
 - **GitHub**: [https://github.com/DhruvHarani1](https://github.com/DhruvHarani1)
 
