@@ -52,8 +52,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contact
 For any questions or feedback, feel free to reach out:
-- **Developer**: Dhruv , Vraj , jainil , Neel
-- **Designer**: Jainil , Neel
+- **Developer**: Dhruv , Vraj , jainil , Neer
+- **Designer**: Jainil , Neer
 - **Tester & Helping Hand's**: Ved , Umang
 - **Email**: dhruvharani5@gmail.com
 - **GitHub**: [https://github.com/DhruvHarani1](https://github.com/DhruvHarani1)
