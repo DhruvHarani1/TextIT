@@ -294,8 +294,13 @@ class MainPage {
         // variables
         boolean flag = true;
 
+
+
         //main loop for 
         do {
+
+
+
             // --- TEMPORARY DESIGN (FOR TESTING)----
             System.out.println("1) Press  # For Comment!!");
             System.out.println("2) Press  * For Like!!");
@@ -309,9 +314,10 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    // System.out.println("Enter number");
-                    // int postnumber = sc.nextInt();
-                    // SU.P[postnumber - 1].displaypost();
+                if (SU.P[SU.postcount-1] == null) {
+                    
+                }
+                    SU.P[SU.postcount-1].createComment();
                     break;
                 case "*":
                     break;
@@ -338,19 +344,31 @@ class MainPage {
 }
 
 class Post {
+
+    //variables
     int like;
     String post;
+    int commentcount;
+    String[] comment = new String[100];
 
     // class
     Scanner sc = new Scanner(System.in);
 
+    //Method to Create Post
     void createPost() {
         System.out.println("Enter Post:");
         post = sc.nextLine();
     }
 
+    //Method to display post
     void displaypost() {
         System.out.println(post);
+    }
+
+    //Method to Comment
+    void createComment(){
+        comment[commentcount] = sc.nextLine();
+        commentcount++;
     }
 
 }
