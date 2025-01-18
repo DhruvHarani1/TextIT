@@ -288,5 +288,5 @@ class MainPage{
 }
 
 class Post{
- int likes;
+    
 }
