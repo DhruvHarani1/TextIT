@@ -228,26 +228,36 @@ class Login {
 
     // Method to take Login details
     public void loginDetail() {
-        System.out.print("Please enter UserName: ");
-        loginName = sc.nextLine();
 
-        System.out.print("Please enter Password: ");
-        loginPassword = sc.nextLine();
+        //variables
+        boolean flag = true;
+
+        do {
+            flag = true;
+            System.out.print("Please enter UserName: ");
+            loginName = sc.nextLine();
+            
+            if (loginName.isEmpty()) {
+                System.out.println("UserName Can't Be Blank");
+                flag = false;
+            }   
+        } while (!flag);
+        do {
+            flag = true;
+            System.out.print("Please enter Password: ");
+            loginPassword = sc.nextLine();
+            
+            if (loginPassword.isEmpty()) {
+                System.out.println("Password Can't Be Blank");
+                flag = false;
+            }   
+        } while (!flag);
     }
 
     // Method to verify Login
     public int verifyLogin(SignUp[] SU) {
 
         boolean flag = false;
-
-        if (loginName.isEmpty()) {
-            System.out.println("UserName Can't Be Blank");
-            loginDetail();
-        }
-        if (loginPassword.isEmpty()) {
-            System.out.println("Password Can't Be Blank");
-            loginDetail();
-        }
 
         int i;
         for (i = 0; i < SU.length; i++) {
