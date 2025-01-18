@@ -46,7 +46,7 @@ public class Main {
                 case 2:
                     LG.loginDetail();
                     int id = LG.verifyLogin(SU);
-                    MP.homePage(SU[id - 1]);
+                    MP.homePage(SU[id - 1], SU, totalUser);
                     break;
                 case 3:
                     // exit
@@ -286,7 +286,7 @@ class Login {
 class MainPage {
 
     // Method to display Main Page Message
-    void homePage(SignUp SU) {
+    void homePage(SignUp SU, SignUp[] ALL, int totalUser) {
 
         // classes
         Scanner sc = new Scanner(System.in);
@@ -294,12 +294,30 @@ class MainPage {
         // variables
         boolean flag = true;
 
-
-
-        //main loop for 
+        // main loop for
         do {
 
-
+            int randomUser = (int) (Math.random() * totalUser);
+            System.out.println(randomUser);
+            int randomPost = (int) (Math.random() * SU.postcount);
+            System.out.println(randomPost);
+            if (ALL[randomUser].P[randomPost] == null) {
+                System.out.println("|-------------------------------|");
+                System.out.println("|\t    TEXTIT \t        |");
+                System.out.println("|-------------------------------|");
+                System.out.println("|1) Vraj\t\t\t|");
+                System.out.println("|Hi, i am Vraj moving\t\t|");
+                System.out.println("|to a new cityin Dubai.\t\t|");
+                System.out.println("|I am Glad to be here\t\t|");
+                System.out.println("|\t\t\t\t|");
+                System.out.println("|-------------------------------|");
+                System.out.println("| like\t comment  \t\t|");
+                System.out.println("|-------------------------------|");
+                System.out.println("| previous\tADD(+)\t    Next|");
+                System.out.println("|-------------------------------|");
+            } else {
+                System.out.println(ALL[randomUser].P[randomPost].post);
+            }
 
             // --- TEMPORARY DESIGN (FOR TESTING)----
             System.out.println("1) Press  # For Comment!!");
@@ -314,10 +332,10 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                if (SU.P[SU.postcount-1] == null) {
-                    
-                }
-                    SU.P[SU.postcount-1].createComment();
+                    if (SU.P[SU.postcount - 1] == null) {
+
+                    }
+                    SU.P[SU.postcount - 1].createComment();
                     break;
                 case "*":
                     break;
@@ -345,7 +363,7 @@ class MainPage {
 
 class Post {
 
-    //variables
+    // variables
     int like;
     String post;
     int commentcount;
@@ -354,19 +372,19 @@ class Post {
     // class
     Scanner sc = new Scanner(System.in);
 
-    //Method to Create Post
+    // Method to Create Post
     void createPost() {
         System.out.println("Enter Post:");
         post = sc.nextLine();
     }
 
-    //Method to display post
+    // Method to display post
     void displaypost() {
         System.out.println(post);
     }
 
-    //Method to Comment
-    void createComment(){
+    // Method to Comment
+    void createComment() {
         comment[commentcount] = sc.nextLine();
         commentcount++;
     }
