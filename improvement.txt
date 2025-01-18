@@ -1,1 +1,1 @@
-in case 1 of signup i have to remove the 2 statement from if else statement and write them once after the if elese statement
+1) remove method of assigning id instead making a constructor

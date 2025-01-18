@@ -82,7 +82,7 @@ class SignUp {
         // variables
         boolean flag = true;
         String name;
-        String Mnumber;
+        String Mnumber; //give some other variable name
         String pass;
 
         // Loop for username
@@ -175,6 +175,10 @@ class SignUp {
     // Method to Verify UserName
     public boolean verifyUserName(String name, SignUp[] SU) {
 
+        if(name.isEmpty()){
+            System.out.println("Please Enter A Valid UserName!");
+            return false;
+        }
         for (int i = 0; i < SU.length; i++) {
             if (name.equals(SU[i].userName)) {
                 System.out.println("Username already exist try other username.");
@@ -235,6 +239,15 @@ class Login {
     public int verifyLogin(SignUp[] SU) {
 
         boolean flag = false;
+
+        if (loginName.isEmpty()) {
+            System.out.println("UserName Can't Be Blank");
+            loginDetail();
+        }
+        if (loginPassword.isEmpty()) {
+            System.out.println("Password Can't Be Blank");
+            loginDetail();
+        }
 
         int i;
         for (i = 0; i < SU.length; i++) {
