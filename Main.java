@@ -236,7 +236,7 @@ class Login {
             flag = true;
             System.out.print("Please enter UserName: ");
             loginName = sc.nextLine();
-            
+
             if (loginName.isEmpty()) {
                 System.out.println("UserName Can't Be Blank");
                 flag = false;
@@ -288,5 +288,5 @@ class MainPage{
 }
 
 class Post{
-
+ int likes;
 }
