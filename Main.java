@@ -46,8 +46,7 @@ public class Main {
                 case 2:
                     LG.loginDetail();
                     int id = LG.verifyLogin(SU);
-                    //MP.displayMainPage(); // It Display the Main Page and Give Option After Login(Sucessfully).
-                    //MP.call(SU, id);
+                    MP.homePage(SU[id - 1]);
                     break;
                 case 3:
                     // exit
@@ -70,6 +69,7 @@ class SignUp {
     String password;
     int id;
     Post[] P = new Post[100];
+    int postcount = 0;
     // String Email;
     // String SecurityQuestion;
 
@@ -82,7 +82,7 @@ class SignUp {
         // variables
         boolean flag = true;
         String name;
-        String Mnumber; //give some other variable name
+        String Mnumber; // give some other variable name
         String pass;
 
         // Loop for username
@@ -103,10 +103,10 @@ class SignUp {
             flag = verifyMobileNumber(Mnumber, SU);
 
             // for (int i = 0; i < SU.length; i++) {
-            //     if (Mnumber.equals(SU[i].mobileNumber)) {
-            //         System.out.println("User already exist go to Login page.");
-            //         return;
-            //     }
+            // if (Mnumber.equals(SU[i].mobileNumber)) {
+            // System.out.println("User already exist go to Login page.");
+            // return;
+            // }
             // }
         } while (!flag);
 
@@ -175,7 +175,7 @@ class SignUp {
     // Method to Verify UserName
     public boolean verifyUserName(String name, SignUp[] SU) {
 
-        if(name.isEmpty()){
+        if (name.isEmpty()) {
             System.out.println("Please Enter A Valid UserName!");
             return false;
         }
@@ -229,7 +229,7 @@ class Login {
     // Method to take Login details
     public void loginDetail() {
 
-        //variables
+        // variables
         boolean flag = true;
 
         do {
@@ -240,17 +240,17 @@ class Login {
             if (loginName.isEmpty()) {
                 System.out.println("UserName Can't Be Blank");
                 flag = false;
-            }   
+            }
         } while (!flag);
         do {
             flag = true;
             System.out.print("Please enter Password: ");
             loginPassword = sc.nextLine();
-            
+
             if (loginPassword.isEmpty()) {
                 System.out.println("Password Can't Be Blank");
                 flag = false;
-            }   
+            }
         } while (!flag);
     }
 
@@ -282,11 +282,75 @@ class Login {
     }
 }
 
-//Class MainPage
-class MainPage{
+// Class MainPage
+class MainPage {
 
+    // Method to display Main Page Message
+    void homePage(SignUp SU) {
+
+        // classes
+        Scanner sc = new Scanner(System.in);
+
+        // variables
+        boolean flag = true;
+
+        //main loop for 
+        do {
+            // --- TEMPORARY DESIGN (FOR TESTING)----
+            System.out.println("1) Press  # For Comment!!");
+            System.out.println("2) Press  * For Like!!");
+            System.out.println("3) Press  > For Next Post");
+            System.out.println("4) Press  < For Perivous Post!!");
+            System.out.println("5) Press  + To Create Post!!");
+            System.out.println("6) Press  @ To Follow!!");
+            System.out.println("7) Press  ` To Exit!!");
+
+            String option = sc.next(); // takes option from above
+
+            switch (option) {
+                case "#":
+                    // System.out.println("Enter number");
+                    // int postnumber = sc.nextInt();
+                    // SU.P[postnumber - 1].displaypost();
+                    break;
+                case "*":
+                    break;
+                case ">":
+                    break;
+                case "<":
+                    break;
+                case "+":
+                    SU.P[SU.postcount] = new Post();
+                    SU.P[SU.postcount].createPost();
+                    SU.postcount++;
+                    break;
+                case "@":
+                    break;
+                case "^":
+                    flag = false;
+                    break;
+
+                default:
+                    break;
+            }
+        } while (flag);
+    }
 }
 
-class Post{
+class Post {
     int like;
+    String post;
+
+    // class
+    Scanner sc = new Scanner(System.in);
+
+    void createPost() {
+        System.out.println("Enter Post:");
+        post = sc.nextLine();
+    }
+
+    void displaypost() {
+        System.out.println(post);
+    }
+
 }
