@@ -298,33 +298,22 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            System.out.println(randomUser);
+            
             int randomPost = (int) (Math.random() * SU.postcount);
-            System.out.println(randomPost);
+
+            displayLogo();
+
             if (ALL[randomUser].P[randomPost] == null) {
-                System.out.println("|-------------------------------|");
-                System.out.println("|\t    TEXTIT \t        |");
-                System.out.println("|-------------------------------|");
                 System.out.println("|1) Vraj\t\t\t|");
                 System.out.println("|Hi, i am Vraj moving\t\t|");
                 System.out.println("|to a new cityin Dubai.\t\t|");
                 System.out.println("|I am Glad to be here\t\t|");
-                System.out.println("|\t\t\t\t|");
-                System.out.println("|-------------------------------|");
-                System.out.println("| like\t comment  \t\t|");
-                System.out.println("|-------------------------------|");
-                System.out.println("| previous\tADD(+)\t    Next|");
-                System.out.println("|-------------------------------|");
             } else {
                 System.out.println(ALL[randomUser].P[randomPost].post);
+                displayOptions();
             }
 
             // --- TEMPORARY DESIGN (FOR TESTING)----
-            System.out.println("1) Press  # For Comment!!");
-            System.out.println("2) Press  * For Like!!");
-            System.out.println("3) Press  > For Next Post");
-            System.out.println("4) Press  < For Perivous Post!!");
-            System.out.println("5) Press  + To Create Post!!");
             System.out.println("6) Press  @ To Follow!!");
             System.out.println("7) Press  ` To Exit!!");
 
@@ -332,16 +321,11 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    if (SU.P[SU.postcount - 1] == null) {
-
-                    }
-                    SU.P[SU.postcount - 1].createComment();
+                    ALL[randomUser].P[randomPost].createComment(ALL[randomUser]);
                     break;
                 case "*":
                     break;
                 case ">":
-                    break;
-                case "<":
                     break;
                 case "+":
                     SU.P[SU.postcount] = new Post();
@@ -359,6 +343,24 @@ class MainPage {
             }
         } while (flag);
     }
+
+    // Method to display LOGO
+    void displayLogo() {
+        System.out.println("|-------------------------------|");
+        System.out.println("|\t    TEXTIT \t        |");
+        System.out.println("|-------------------------------|");
+    }
+
+    // Method to Display Opitons (ex. Like,Comment,Follow,Share etc...)
+    void displayOptions() {
+        System.out.println("|\t\t\t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| like\t comment  \t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| previous\tADD(+)\t    Next|");
+        System.out.println("|-------------------------------|");
+    }
+
 }
 
 class Post {
@@ -366,6 +368,7 @@ class Post {
     // variables
     int like;
     String post;
+    String commenter;
     int commentcount;
     String[] comment = new String[100];
 
@@ -384,7 +387,8 @@ class Post {
     }
 
     // Method to Comment
-    void createComment() {
+    void createComment(SignUp SU) {
+        commenter = SU.userName;
         comment[commentcount] = sc.nextLine();
         commentcount++;
     }
