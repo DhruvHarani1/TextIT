@@ -298,6 +298,7 @@ class MainPage {
         // main loop for
         do {
 
+
             int randomUser = (int) (Math.random() * totalUser);
 
             int randomPost = (int) (Math.random() * SU.postcount);
@@ -368,6 +369,28 @@ class MainPage {
             System.out.println();
             System.out.println("Enter Your choice :");
 
+
+            int randomUser = (int) (Math.random() * totalUser);
+            
+            int randomPost = (int) (Math.random() * SU.postcount);
+
+            displayLogo();
+
+            if (ALL[randomUser].P[randomPost] == null) {
+                System.out.println("|1) Vraj\t\t\t|");
+                System.out.println("|Hi, i am Vraj moving\t\t|");
+                System.out.println("|to a new cityin Dubai.\t\t|");
+                System.out.println("|I am Glad to be here\t\t|");
+            } else {
+                System.out.println(ALL[randomUser].P[randomPost].post);
+                displayOptions();
+            }
+
+            // --- TEMPORARY DESIGN (FOR TESTING)----
+            System.out.println("6) Press  @ To Follow!!");
+            System.out.println("7) Press  ` To Exit!!");
+
+
             String option = sc.next(); // takes option from above
 
             switch (option) {
@@ -413,6 +436,16 @@ class MainPage {
      * System.out.println("|-------------------------------|");
      * }
      */
+
+    void displayOptions() {
+        System.out.println("|\t\t\t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| like\t comment  \t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| previous\tADD(+)\t    Next|");
+        System.out.println("|-------------------------------|");
+    }
+
 
 }
 
