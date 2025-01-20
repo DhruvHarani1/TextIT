@@ -67,7 +67,7 @@ class SignUp {
     String mobileNumber;
     String userName;
     String password;
-    int id;
+    int ID;
     Post[] P = new Post[100];
     int postcount = 0;
     // String Email;
@@ -128,7 +128,7 @@ class SignUp {
 
     // Method to give id to all users
     void id(int totalUser) {
-        id = totalUser + 1;
+        ID = totalUser + 1;
     }
 
     // Method to Grow The array of object of Signup as a New User Comes
@@ -272,13 +272,14 @@ class Login {
         if (flag) {
             // redirect to main page...
             System.out.println("Thank you for login in our Application.");
-            return SU[i].id;
+            return SU[i].ID;
         } else {
+            i =0;
             System.out.println("No User Found\n Either Wrong UserName or PassWord");
             loginDetail();
             verifyLogin(SU);
         }
-        return 0;
+        return SU[i].ID;
     }
 }
 
@@ -298,12 +299,11 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            
             int randomPost = (int) (Math.random() * SU.postcount);
 
-            displayLogo();
             // Design is modified and tested here(Vraj)..
             if (ALL[randomUser].P[randomPost] == null) {
+                displayLogo();
                 System.out.println("|1) Vraj\t\t\t|");
                 System.out.println("|Hi, i am Vraj moving\t\t|");
                 System.out.println("|to a new cityin Dubai.\t\t|");
@@ -314,15 +314,56 @@ class MainPage {
                 System.out.println("|-------------------------------|");
                 System.out.println();
             } else {
-               /*  if(ALL[randomUser].P[randomPost].post.length()>32){
-                    System.out.println("| @"+ALL[randomUser].userName+ALL[randomUser].P[randomPost].post+"|");
-                }*/
-                System.out.println("| @"+ALL[randomUser].userName+"\t\t\t\t |\n|"+ALL[randomUser].P[randomPost].post+"|");
-                displayOptions();
+
+                System.out.println("|----------------------------|");
+                System.out.println("|\t    TEXTIT \t     |");
+                System.out.println("|----------------------------|");
+
+                //
+                String topLine = "| @" + ALL[randomUser].userName + " ".repeat(29 - ALL[randomUser].userName.length())
+                        + "\b\b\b" + "|";
+                System.out.println(topLine);
+
+                int contentWidth = 29; // Space for padding and borders
+                String[] words = ALL[randomUser].P[randomPost].post.split(" ");
+                StringBuffer line = new StringBuffer("|");
+
+                for (String word : words) {
+                    if (line.length() + word.length() + 1 > contentWidth) {
+                        // Fill the remaining spaces in the current line
+                        while (line.length() < contentWidth) {
+                            line.append(" ");
+                        }
+                        System.out.println(line + "|");
+                        line = new StringBuffer("| " + word); // Start a new line with the current word
+                    } else {
+                        line.append(" ");
+                        line.append(word);
+                    }
+                }
+
+                // Fill the remaining spaces in the last line
+                while (line.length() < contentWidth) {
+                    line.append(" ");
+                }
+                System.out.println(line + "|");
+                System.out.println("|----------------------------|");
+
+                String left = "previous";
+                String center = "ADD(+)";
+                String right = "Next";
+
+                int spaceBetween = (31 - (left.length() + center.length() + right.length())) / 2;
+
+                System.out.println("| " + left + " ".repeat(spaceBetween) + center + " ".repeat(spaceBetween) + "\b\b\b"
+                        + right + "|");
+                System.out.println("|----------------------------|");
+
+                // displayOptions();
             }
 
             // --- TEMPORARY DESIGN (FOR TESTING)----
-           // System.out.println("6) Press  @ To Follow!!");
+            // System.out.println("6) Press @ To Follow!!");
             System.out.println("7) Press  ^ To Exit!!");
             System.out.println();
             System.out.println("Enter Your choice :");
@@ -362,14 +403,16 @@ class MainPage {
     }
 
     // Method to Display Opitons (ex. Like,Comment,Follow,Share etc...)
-    void displayOptions() {
-        System.out.println("|\t\t\t\t|");
-        System.out.println("|-------------------------------|");
-        System.out.println("| like\t comment  \t\t|");
-        System.out.println("|-------------------------------|");
-        System.out.println("| previous\tADD(+)\t    Next|");
-        System.out.println("|-------------------------------|");
-    }
+    /*
+     * void displayOptions() {
+     * System.out.println("|\t\t\t\t|");
+     * System.out.println("|-------------------------------|");
+     * System.out.println("| like\t comment  \t\t|");
+     * System.out.println("|-------------------------------|");
+     * System.out.println("| previous\tADD(+)\t    Next|");
+     * System.out.println("|-------------------------------|");
+     * }
+     */
 
 }
 
@@ -401,6 +444,6 @@ class Post {
         commenter = SU.userName;
         comment[commentcount] = sc.nextLine();
         commentcount++;
-    }
+}
 
 }
