@@ -298,7 +298,6 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            
             int randomPost = (int) (Math.random() * SU.postcount);
 
             displayLogo();
@@ -321,7 +320,8 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    ALL[randomUser].P[randomPost].createComment(ALL[randomUser]);
+                    ALL[randomUser].P[randomPost].createComment(SU);
+                    ALL[randomUser].P[randomPost].displayComment();
                     break;
                 case "*":
                     break;
@@ -337,7 +337,6 @@ class MainPage {
                 case "^":
                     flag = false;
                     break;
-
                 default:
                     break;
             }
@@ -367,9 +366,9 @@ class Post {
 
     // variables
     int like;
-    String post;
-    String commenter;
     int commentcount;
+    String post;
+    String[] commenter = new String[100];
     String[] comment = new String[100];
 
     // class
@@ -381,16 +380,19 @@ class Post {
         post = sc.nextLine();
     }
 
-    // Method to display post
-    void displaypost() {
-        System.out.println(post);
-    }
-
     // Method to Comment
     void createComment(SignUp SU) {
-        commenter = SU.userName;
+        commenter[commentcount] = SU.userName;
         comment[commentcount] = sc.nextLine();
         commentcount++;
+    }
+
+    // Method TO display Comments on a post
+    void displayComment() {
+        for (int i = 0; i < commentcount; i++) {
+            System.out.println("----- " + commenter[i] + " ------");
+            System.out.println("----- " + comment[i] + " ------");
+        }
     }
 
 }
