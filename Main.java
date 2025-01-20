@@ -1,8 +1,8 @@
-//package TextIT;
+package TextIT;
 
 import java.util.*;
 
-public class Main {
+ class t {
 
     public static void main(String[] args) {
 
@@ -315,30 +315,30 @@ class MainPage {
                 System.out.println();
             } else {
 
-                System.out.println("|----------------------------|");
-                System.out.println("|\t    TEXTIT \t     |");
-                System.out.println("|----------------------------|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                System.out.println("|\t       TEXTIT    \t      |");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-                //
-                String topLine = "| @" + ALL[randomUser].userName + " ".repeat(29 - ALL[randomUser].userName.length())
-                        + "\b\b\b" + "|";
+                // BY :  
+                String topLine = "| BY: " + ALL[randomUser].userName + " ".repeat(32 - ALL[randomUser].userName.length())+ "|";
                 System.out.println(topLine);
+                System.out.println("|                                     |");
 
-                int contentWidth = 29; // Space for padding and borders
+                int contentWidth = 38; // Space for padding and borders
                 String[] words = ALL[randomUser].P[randomPost].post.split(" ");
                 StringBuffer line = new StringBuffer("|");
 
-                for (String word : words) {
-                    if (line.length() + word.length() + 1 > contentWidth) {
+                for (int i = 0 ; i <words.length ; i++) {
+                    if (line.length() + words[i].length() +1 > contentWidth) {
                         // Fill the remaining spaces in the current line
                         while (line.length() < contentWidth) {
                             line.append(" ");
                         }
                         System.out.println(line + "|");
-                        line = new StringBuffer("| " + word); // Start a new line with the current word
+                        line = new StringBuffer("| " + words[i]); // Start a new line with the current word
                     } else {
                         line.append(" ");
-                        line.append(word);
+                        line.append(words[i]);
                     }
                 }
 
@@ -347,17 +347,17 @@ class MainPage {
                     line.append(" ");
                 }
                 System.out.println(line + "|");
-                System.out.println("|----------------------------|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-                String left = "previous";
-                String center = "ADD(+)";
-                String right = "Next";
+                String left = "Like(*)";
+                String center = "Comment(#)";
+                String right = "Follow(@)";
 
-                int spaceBetween = (31 - (left.length() + center.length() + right.length())) / 2;
+                int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2;
 
-                System.out.println("| " + left + " ".repeat(spaceBetween) + center + " ".repeat(spaceBetween) + "\b\b\b"
+                System.out.println("| " + left + " ".repeat(spaceBetween-1) + center + " ".repeat(spaceBetween) + "\b\b\b"
                         + right + "|");
-                System.out.println("|----------------------------|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // displayOptions();
             }
