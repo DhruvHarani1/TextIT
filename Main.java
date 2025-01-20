@@ -438,7 +438,6 @@ class Post {
         commentcount++;
 }
 
-<<<<<<< HEAD
     // Method TO display Comments on a post
     void displayComment() {
         for (int i = 0; i < commentcount; i++) {
@@ -448,6 +447,3 @@ class Post {
     }
 
 }
-=======
-}
->>>>>>> ff1b74128f1b764e2ec596d4b6ef714dba6ac811
