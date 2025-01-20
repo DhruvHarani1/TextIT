@@ -403,17 +403,14 @@ class MainPage {
     }
 
     // Method to Display Opitons (ex. Like,Comment,Follow,Share etc...)
-    /*
-     * void displayOptions() {
-     * System.out.println("|\t\t\t\t|");
-     * System.out.println("|-------------------------------|");
-     * System.out.println("| like\t comment  \t\t|");
-     * System.out.println("|-------------------------------|");
-     * System.out.println("| previous\tADD(+)\t    Next|");
-     * System.out.println("|-------------------------------|");
-     * }
-     */
-
+    void displayOptions() {
+        System.out.println("|\t\t\t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| like\t comment  \t\t|");
+        System.out.println("|-------------------------------|");
+        System.out.println("| previous\tADD(+)\t    Next|");
+        System.out.println("|-------------------------------|");
+    }
 }
 
 class Post {
