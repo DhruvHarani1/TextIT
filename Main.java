@@ -2,9 +2,7 @@ package TextIT;
 
 import java.util.*;
 
-
 public class Main {
-
 
     public static void main(String[] args) {
 
@@ -68,7 +66,7 @@ class SignUp {
     // variables
     String mobileNumber;
     String userName;
-    String goodname =" ";
+    String goodname = " ";
     String bio = " ";
     String password;
     int ID;
@@ -324,10 +322,9 @@ class MainPage {
                 System.out.println("|\t       TEXTIT    \t      |");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-
-
-                // BY :  
-                String topLine = "| BY: " + ALL[randomUser].userName + " ".repeat(32 - ALL[randomUser].userName.length())+ "|";
+                // BY :
+                String topLine = "| BY: " + ALL[randomUser].userName
+                        + " ".repeat(32 - ALL[randomUser].userName.length()) + "|";
                 System.out.println(topLine);
                 System.out.println("|                                     |");
 
@@ -335,8 +332,8 @@ class MainPage {
                 String[] words = ALL[randomUser].P[randomPost].post.split(" ");
                 StringBuffer line = new StringBuffer("|");
 
-                for (int i = 0 ; i <words.length ; i++) {
-                    if (line.length() + words[i].length() +1 > contentWidth) {
+                for (int i = 0; i < words.length; i++) {
+                    if (line.length() + words[i].length() + 1 > contentWidth) {
                         // Fill the remaining spaces in the current line
                         while (line.length() < contentWidth) {
                             line.append(" ");
@@ -362,9 +359,9 @@ class MainPage {
 
                 int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2;
 
-
-                System.out.println("| " + left + " ".repeat(spaceBetween-1) + center + " ".repeat(spaceBetween) + "\b\b\b"
-                        + right + "|");
+                System.out.println(
+                        "| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b"
+                                + right + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // displayOptions();
@@ -392,7 +389,7 @@ class MainPage {
                     SU.postcount++;
                     break;
                 case "@":
-                PF.profilePage(SU);
+                    PF.profilePage(SU);
                     break;
                 case "^":
                     flag = false;
@@ -417,7 +414,7 @@ class Post {
     int like;
     int commentcount;
     String post;
-    String[] commenter = new String[100];
+    String commenter;
     String[] comment = new String[100];
 
     // class
@@ -431,7 +428,6 @@ class Post {
 
     // Method to Comment
     void createComment(SignUp SU) {
-
 
         // Display 5 Comment At a time and Next Button for Next 5..
 
@@ -460,9 +456,7 @@ class Post {
 
             }
             displayCommentsChoice();
-
         }
-
     }
 
     void displayCommentsChoice() {
@@ -486,7 +480,6 @@ class Post {
         }
         displayCommentsChoice();
     }
-
 }
 
 class Profile {
@@ -516,7 +509,7 @@ class Profile {
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Name: " + SU.goodname + " ".repeat(30 - SU.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Bio: " + " ".repeat(boxWidth-6) + "|");
+            System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
 
             for (int i = 0; i < words.length; i++) {
                 if (line.length() + words[i].length() + 1 > boxWidth) {
@@ -549,12 +542,12 @@ class Profile {
                 case 1:
                     break;
                 case 2:
-                System.out.print("Enter Name: ");
-                SU.goodname = sc.nextLine();
+                    System.out.print("Enter Name: ");
+                    SU.goodname = sc.nextLine();
                     break;
                 case 3:
-                System.out.println("Enter Your Bio");
-                SU.bio = sc.nextLine();
+                    System.out.println("Enter Your Bio");
+                    SU.bio = sc.nextLine();
                     break;
                 case 4:
                     break;
@@ -562,20 +555,6 @@ class Profile {
                 default:
                     break;
             }
-        } while (choice!=4);
-}
-
-        commenter[commentcount] = SU.userName;
-        comment[commentcount] = sc.nextLine();
-        commentcount++;
-}
-
-    // Method TO display Comments on a post
-    void displayComment() {
-        for (int i = 0; i < commentcount; i++) {
-            System.out.println("----- " + commenter[i] + " ------");
-            System.out.println("----- " + comment[i] + " ------");
-        }
+        } while (choice != 4);
     }
-
 }
