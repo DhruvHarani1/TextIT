@@ -2,7 +2,9 @@ package TextIT;
 
 import java.util.*;
 
-class t {
+
+public class Main {
+
 
     public static void main(String[] args) {
 
@@ -322,9 +324,10 @@ class MainPage {
                 System.out.println("|\t       TEXTIT    \t      |");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-                // BY :
-                String topLine = "| BY: " + ALL[randomUser].userName
-                        + " ".repeat(32 - ALL[randomUser].userName.length()) + "|";
+
+
+                // BY :  
+                String topLine = "| BY: " + ALL[randomUser].userName + " ".repeat(32 - ALL[randomUser].userName.length())+ "|";
                 System.out.println(topLine);
                 System.out.println("|                                     |");
 
@@ -332,8 +335,8 @@ class MainPage {
                 String[] words = ALL[randomUser].P[randomPost].post.split(" ");
                 StringBuffer line = new StringBuffer("|");
 
-                for (int i = 0; i < words.length; i++) {
-                    if (line.length() + words[i].length() + 1 > contentWidth) {
+                for (int i = 0 ; i <words.length ; i++) {
+                    if (line.length() + words[i].length() +1 > contentWidth) {
                         // Fill the remaining spaces in the current line
                         while (line.length() < contentWidth) {
                             line.append(" ");
@@ -359,9 +362,9 @@ class MainPage {
 
                 int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2;
 
-                System.out.println(
-                        "| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b"
-                                + right + "|");
+
+                System.out.println("| " + left + " ".repeat(spaceBetween-1) + center + " ".repeat(spaceBetween) + "\b\b\b"
+                        + right + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // displayOptions();
@@ -378,7 +381,6 @@ class MainPage {
             switch (option) {
                 case "#":
                     ALL[randomUser].P[randomPost].createComment(ALL[randomUser]);
-
                     break;
                 case "*":
                     break;
@@ -395,7 +397,6 @@ class MainPage {
                 case "^":
                     flag = false;
                     break;
-
                 default:
                     break;
             }
@@ -408,16 +409,15 @@ class MainPage {
         System.out.println("|\t    TEXTIT \t        |");
         System.out.println("|-------------------------------|");
     }
-
 }
 
 class Post {
 
     // variables
     int like;
-    String post;
-    String commenter;
     int commentcount;
+    String post;
+    String[] commenter = new String[100];
     String[] comment = new String[100];
 
     // class
@@ -429,13 +429,9 @@ class Post {
         post = sc.nextLine();
     }
 
-    // Method to display post
-    void displaypost() {
-        System.out.println(post);
-    }
-
     // Method to Comment
     void createComment(SignUp SU) {
+
 
         // Display 5 Comment At a time and Next Button for Next 5..
 
@@ -568,4 +564,18 @@ class Profile {
             }
         } while (choice!=4);
 }
+
+        commenter[commentcount] = SU.userName;
+        comment[commentcount] = sc.nextLine();
+        commentcount++;
+}
+
+    // Method TO display Comments on a post
+    void displayComment() {
+        for (int i = 0; i < commentcount; i++) {
+            System.out.println("----- " + commenter[i] + " ------");
+            System.out.println("----- " + comment[i] + " ------");
+        }
+    }
+
 }

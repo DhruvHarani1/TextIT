@@ -1,1 +1,1 @@
-1) remove method of assigning id instead making a constructor
+1) When Login is Invode Before SignUp , It Recurrsively ask for PassWord  and UserName That Does not Exit.
