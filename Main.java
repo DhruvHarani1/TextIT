@@ -66,7 +66,7 @@ class SignUp {
     // variables
     String mobileNumber;
     String userName;
-    String goodname =" ";
+    String goodname = " ";
     String bio = " ";
     String password;
     int ID;
@@ -288,8 +288,9 @@ class Login {
 // Class MainPage
 class MainPage {
 
+
     // Method to display Main Page Message
-    void homePage(SignUp SU, SignUp[] ALL, int totalUser) {
+    void homePage(SignUp logedUser, SignUp[] allUser, int totalUser) {
 
         // classes
         Scanner sc = new Scanner(System.in);
@@ -302,10 +303,10 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            int randomPost = (int) (Math.random() * SU.postcount);
+            int randomPost = (int) (Math.random() * logedUser.postcount);
 
             // Design is modified and tested here(Vraj)..
-            if (ALL[randomUser].P[randomPost] == null) {
+            if (allUser[randomUser].P[randomPost] == null) {
                 displayLogo();
                 System.out.println("|1) Vraj\t\t\t|");
                 System.out.println("|Hi, i am Vraj moving\t\t|");
@@ -323,13 +324,13 @@ class MainPage {
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // BY :
-                String topLine = "| BY: " + ALL[randomUser].userName
-                        + " ".repeat(32 - ALL[randomUser].userName.length()) + "|";
+                String topLine = "| BY: " + allUser[randomUser].userName
+                        + " ".repeat(32 - allUser[randomUser].userName.length()) + "|";
                 System.out.println(topLine);
                 System.out.println("|                                     |");
 
                 int contentWidth = 38; // Space for padding and borders
-                String[] words = ALL[randomUser].P[randomPost].post.split(" ");
+                String[] words = allUser[randomUser].P[randomPost].post.split(" ");
                 StringBuffer line = new StringBuffer("|");
 
                 for (int i = 0; i < words.length; i++) {
@@ -363,6 +364,15 @@ class MainPage {
                         "| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b"
                                 + right + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                System.out.println("");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+               
+                String left1= "Profile(@)";
+                String center1= "ADD(+)";
+                String right1 ="Next(>)";
+                int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length()))/2;
+                System.out.println("| "+left1 +" ".repeat(spaceBetween1-1)+center1+" ".repeat(spaceBetween1-2)+right1+"|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // displayOptions();
             }
@@ -377,7 +387,7 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    ALL[randomUser].P[randomPost].createComment(ALL[randomUser]);
+                    allUser[randomUser].P[randomPost].createComment(logedUser);
 
                     break;
                 case "*":
@@ -385,12 +395,12 @@ class MainPage {
                 case ">":
                     break;
                 case "+":
-                    SU.P[SU.postcount] = new Post();
-                    SU.P[SU.postcount].createPost();
-                    SU.postcount++;
+                    logedUser.P[logedUser.postcount] = new Post();
+                    logedUser.P[logedUser.postcount].createPost();
+                    logedUser.postcount++;
                     break;
                 case "@":
-                PF.profilePage(SU);
+                PF.profilePage(logedUser);
                     break;
                 case "^":
                     flag = false;
@@ -401,6 +411,7 @@ class MainPage {
             }
         } while (flag);
     }
+
 
     // Method to display LOGO
     void displayLogo() {
@@ -416,7 +427,7 @@ class Post {
     // variables
     int like;
     String post;
-    String commenter;
+    String[] commenter = new String[100];
     int commentcount;
     String[] comment = new String[100];
 
@@ -435,16 +446,16 @@ class Post {
     }
 
     // Method to Comment
-    void createComment(SignUp SU) {
+    void createComment(SignUp loggedUser) {
 
         // Display 5 Comment At a time and Next Button for Next 5..
 
-        commenter = SU.userName;
+        commenter[commentcount] = loggedUser.userName;
         // Display When there is no Comment
         if (comment[0] == null) {
             System.out.println("-------------------------------");
             System.out.println("\t No Comments Yet");
-            System.out.println("-------------------------------\n");
+            System.out.println("-------------------------------\n\n");
 
             displayCommentsChoice();
         } else {
@@ -456,7 +467,8 @@ class Post {
                     // display all comment
 
                     System.out.println("-------------------------------");
-                    System.out.println("BY:" + commenter + "\n");
+                    System.out.println("BY:" + commenter[i]);
+                    System.out.println("  Replaying to @" + loggedUser.userName + "\n");
                     System.out.println("   " + comment[i]);
                     System.out.println("-------------------------------\n");
 
@@ -471,9 +483,10 @@ class Post {
 
     void displayCommentsChoice() {
 
-        System.out.println(" Back(^) \tADD(+)\n");
+        System.out.println(" Back(^) \tADD(+)\n\n");
         System.out.print("Enter your Choice:");
         String choice = sc.nextLine();
+        System.out.println();
         if (choice.equals("^")) {
             // return to MainPage..
             return;
@@ -510,6 +523,7 @@ class Profile {
             System.out.println("\t\t\t<>                  PROFILE                      <>");
             System.out.println("\t\t\t<>                                               <>");
             System.out.println("\t\t\t<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+            System.out.println();
             int boxWidth = 38;
             StringBuffer line = new StringBuffer("|");
             String[] words = SU.bio.split(" ");
@@ -520,7 +534,7 @@ class Profile {
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Name: " + SU.goodname + " ".repeat(30 - SU.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Bio: " + " ".repeat(boxWidth-6) + "|");
+            System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
 
             for (int i = 0; i < words.length; i++) {
                 if (line.length() + words[i].length() + 1 > boxWidth) {
@@ -553,12 +567,12 @@ class Profile {
                 case 1:
                     break;
                 case 2:
-                System.out.print("Enter Name: ");
-                SU.goodname = sc.nextLine();
+                    System.out.print("Enter Name: ");
+                    SU.goodname = sc.nextLine();
                     break;
                 case 3:
-                System.out.println("Enter Your Bio");
-                SU.bio = sc.nextLine();
+                    System.out.println("Enter Your Bio");
+                    SU.bio = sc.nextLine();
                     break;
                 case 4:
                     break;
@@ -566,6 +580,6 @@ class Profile {
                 default:
                     break;
             }
-        } while (choice!=4);
-}
+        } while (choice != 4);
+    }
 }
