@@ -2,7 +2,7 @@ package TextIT;
 
 import java.util.*;
 
-class t {
+public class Main {
 
     public static void main(String[] args) {
 
@@ -44,10 +44,15 @@ class t {
                     break;
 
                 case 2:
-                    LG.loginDetail();
-                    int id = LG.verifyLogin(SU);
-                    MP.homePage(SU[id - 1], SU, totalUser);
-                    break;
+                    if (SU[0].userName == null) {
+                        System.out.println("No user yet ");
+                        System.out.println("Be the first one to use the app ");
+                    } else {
+                        LG.loginDetail();
+                        int id = LG.verifyLogin(SU);
+                        MP.homePage(SU[id - 1], SU, totalUser);
+                        break;
+                    }
                 case 3:
                     // exit
                     break;
@@ -391,6 +396,8 @@ class MainPage {
 
                     break;
                 case "*":
+                allUser[randomUser].P[randomPost].likemonitor(logedUser);
+                System.out.print(allUser[randomUser].P[randomPost].likecount);
                     break;
                 case ">":
                     break;
@@ -405,7 +412,6 @@ class MainPage {
                 case "^":
                     flag = false;
                     break;
-
                 default:
                     break;
             }
@@ -419,13 +425,13 @@ class MainPage {
         System.out.println("|\t    TEXTIT \t        |");
         System.out.println("|-------------------------------|");
     }
-
 }
 
 class Post {
 
     // variables
-    int like;
+    int likecount=0;
+    String[] whoLiked = new String[100];
     String post;
     String[] commenter = new String[100];
     int commentcount;
@@ -438,11 +444,6 @@ class Post {
     void createPost() {
         System.out.println("Enter Post:");
         post = sc.nextLine();
-    }
-
-    // Method to display post
-    void displaypost() {
-        System.out.println(post);
     }
 
     // Method to Comment
@@ -476,9 +477,7 @@ class Post {
 
             }
             displayCommentsChoice();
-
         }
-
     }
 
     void displayCommentsChoice() {
@@ -504,6 +503,25 @@ class Post {
         displayCommentsChoice();
     }
 
+    //Mehtod To like a Post
+    void likemonitor(SignUp logedUser){
+        boolean flag = true;
+        
+        whoLiked[likecount] = logedUser.userName;
+
+        for (int i = 0; i < likecount; i++) {
+            if ( whoLiked[i].equals(whoLiked[likecount])) {
+                System.out.println("You Have already Liked this post");
+                System.out.println("Cant like more than Once");
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            likecount++;
+        }
+    }
+    
 }
 
 class Profile {
@@ -512,7 +530,7 @@ class Profile {
     Scanner sc = new Scanner(System.in);
 
     // Method of design of Profile
-    void profilePage(SignUp SU) {
+    void profilePage(SignUp logedUser) {
 
         int choice;
 
@@ -526,13 +544,13 @@ class Profile {
             System.out.println();
             int boxWidth = 38;
             StringBuffer line = new StringBuffer("|");
-            String[] words = SU.bio.split(" ");
+            String[] words = logedUser.bio.split(" ");
 
             System.out.println("****************************************");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| UserName: " + SU.userName + " ".repeat(26 - SU.userName.length()) + " |");
+            System.out.println("| UserName: " + logedUser.userName + " ".repeat(26 - logedUser.userName.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Name: " + SU.goodname + " ".repeat(30 - SU.goodname.length()) + " |");
+            System.out.println("| Name: " + logedUser.goodname + " ".repeat(30 - logedUser.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
 
@@ -568,11 +586,11 @@ class Profile {
                     break;
                 case 2:
                     System.out.print("Enter Name: ");
-                    SU.goodname = sc.nextLine();
+                    logedUser.goodname = sc.nextLine();
                     break;
                 case 3:
-                    System.out.println("Enter Your Bio");
-                    SU.bio = sc.nextLine();
+                System.out.println("Enter Your Bio");
+                loggedUser.bio = sc.nextLine();
                     break;
                 case 4:
                     break;
