@@ -44,10 +44,15 @@ public class Main {
                     break;
 
                 case 2:
-                    LG.loginDetail();
-                    int id = LG.verifyLogin(SU);
-                    MP.homePage(SU[id - 1], SU, totalUser);
-                    break;
+                    if (SU[0].userName == null) {
+                        System.out.println("No user yet ");
+                        System.out.println("Be the first one to use the app ");
+                    } else {
+                        LG.loginDetail();
+                        int id = LG.verifyLogin(SU);
+                        MP.homePage(SU[id - 1], SU, totalUser);
+                        break;
+                    }
                 case 3:
                     // exit
                     break;
@@ -289,7 +294,7 @@ class Login {
 class MainPage {
 
     // Method to display Main Page Message
-    void homePage(SignUp SU, SignUp[] ALL, int totalUser) {
+    void homePage(SignUp logedUser, SignUp[] allUser, int totalUser) {
 
         // classes
         Scanner sc = new Scanner(System.in);
@@ -302,10 +307,10 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            int randomPost = (int) (Math.random() * SU.postcount);
+            int randomPost = (int) (Math.random() * logedUser.postcount);
 
             // Design is modified and tested here(Vraj)..
-            if (ALL[randomUser].P[randomPost] == null) {
+            if (allUser[randomUser].P[randomPost] == null) {
                 displayLogo();
                 System.out.println("|1) Vraj\t\t\t|");
                 System.out.println("|Hi, i am Vraj moving\t\t|");
@@ -323,13 +328,13 @@ class MainPage {
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // BY :
-                String topLine = "| BY: " + ALL[randomUser].userName
-                        + " ".repeat(32 - ALL[randomUser].userName.length()) + "|";
+                String topLine = "| BY: " + allUser[randomUser].userName
+                        + " ".repeat(32 - allUser[randomUser].userName.length()) + "|";
                 System.out.println(topLine);
                 System.out.println("|                                     |");
 
                 int contentWidth = 38; // Space for padding and borders
-                String[] words = ALL[randomUser].P[randomPost].post.split(" ");
+                String[] words = allUser[randomUser].P[randomPost].post.split(" ");
                 StringBuffer line = new StringBuffer("|");
 
                 for (int i = 0; i < words.length; i++) {
@@ -377,19 +382,21 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    ALL[randomUser].P[randomPost].createComment(ALL[randomUser]);
+                    allUser[randomUser].P[randomPost].createComment(logedUser);
                     break;
                 case "*":
+                allUser[randomUser].P[randomPost].likemonitor(logedUser);
+                System.out.print(allUser[randomUser].P[randomPost].likecount);
                     break;
                 case ">":
                     break;
                 case "+":
-                    SU.P[SU.postcount] = new Post();
-                    SU.P[SU.postcount].createPost();
-                    SU.postcount++;
+                    logedUser.P[logedUser.postcount] = new Post();
+                    logedUser.P[logedUser.postcount].createPost();
+                    logedUser.postcount++;
                     break;
                 case "@":
-                    PF.profilePage(SU);
+                    PF.profilePage(logedUser);
                     break;
                 case "^":
                     flag = false;
@@ -411,7 +418,8 @@ class MainPage {
 class Post {
 
     // variables
-    int like;
+    int likecount=0;
+    String[] whoLiked = new String[100];
     int commentcount;
     String post;
     String commenter;
@@ -427,11 +435,11 @@ class Post {
     }
 
     // Method to Comment
-    void createComment(SignUp SU) {
+    void createComment(SignUp logedUser) {
 
         // Display 5 Comment At a time and Next Button for Next 5..
 
-        commenter = SU.userName;
+        commenter = logedUser.userName;
         // Display When there is no Comment
         if (comment[0] == null) {
             System.out.println("-------------------------------");
@@ -480,6 +488,26 @@ class Post {
         }
         displayCommentsChoice();
     }
+
+    //Mehtod To like a Post
+    void likemonitor(SignUp logedUser){
+        boolean flag = true;
+        
+        whoLiked[likecount] = logedUser.userName;
+
+        for (int i = 0; i < likecount; i++) {
+            if ( whoLiked[i].equals(whoLiked[likecount])) {
+                System.out.println("You Have already Liked this post");
+                System.out.println("Cant like more than Once");
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            likecount++;
+        }
+    }
+    
 }
 
 class Profile {
@@ -488,7 +516,7 @@ class Profile {
     Scanner sc = new Scanner(System.in);
 
     // Method of design of Profile
-    void profilePage(SignUp SU) {
+    void profilePage(SignUp logedUser) {
 
         int choice;
 
@@ -501,13 +529,13 @@ class Profile {
             System.out.println("\t\t\t<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
             int boxWidth = 38;
             StringBuffer line = new StringBuffer("|");
-            String[] words = SU.bio.split(" ");
+            String[] words = logedUser.bio.split(" ");
 
             System.out.println("****************************************");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| UserName: " + SU.userName + " ".repeat(26 - SU.userName.length()) + " |");
+            System.out.println("| UserName: " + logedUser.userName + " ".repeat(26 - logedUser.userName.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Name: " + SU.goodname + " ".repeat(30 - SU.goodname.length()) + " |");
+            System.out.println("| Name: " + logedUser.goodname + " ".repeat(30 - logedUser.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
 
@@ -543,11 +571,11 @@ class Profile {
                     break;
                 case 2:
                     System.out.print("Enter Name: ");
-                    SU.goodname = sc.nextLine();
+                    logedUser.goodname = sc.nextLine();
                     break;
                 case 3:
                     System.out.println("Enter Your Bio");
-                    SU.bio = sc.nextLine();
+                    logedUser.bio = sc.nextLine();
                     break;
                 case 4:
                     break;
