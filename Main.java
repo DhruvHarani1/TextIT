@@ -293,6 +293,7 @@ class Login {
 // Class MainPage
 class MainPage {
 
+
     // Method to display Main Page Message
     void homePage(SignUp logedUser, SignUp[] allUser, int totalUser) {
 
@@ -368,6 +369,15 @@ class MainPage {
                         "| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b"
                                 + right + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                System.out.println("");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+               
+                String left1= "Profile(@)";
+                String center1= "ADD(+)";
+                String right1 ="Next(>)";
+                int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length()))/2;
+                System.out.println("| "+left1 +" ".repeat(spaceBetween1-1)+center1+" ".repeat(spaceBetween1-2)+right1+"|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // displayOptions();
             }
@@ -383,6 +393,7 @@ class MainPage {
             switch (option) {
                 case "#":
                     allUser[randomUser].P[randomPost].createComment(logedUser);
+
                     break;
                 case "*":
                 allUser[randomUser].P[randomPost].likemonitor(logedUser);
@@ -396,7 +407,7 @@ class MainPage {
                     logedUser.postcount++;
                     break;
                 case "@":
-                    PF.profilePage(logedUser);
+                PF.profilePage(logedUser);
                     break;
                 case "^":
                     flag = false;
@@ -406,6 +417,7 @@ class MainPage {
             }
         } while (flag);
     }
+
 
     // Method to display LOGO
     void displayLogo() {
@@ -420,9 +432,9 @@ class Post {
     // variables
     int likecount=0;
     String[] whoLiked = new String[100];
-    int commentcount;
     String post;
-    String commenter;
+    String[] commenter = new String[100];
+    int commentcount;
     String[] comment = new String[100];
 
     // class
@@ -435,16 +447,16 @@ class Post {
     }
 
     // Method to Comment
-    void createComment(SignUp logedUser) {
+    void createComment(SignUp loggedUser) {
 
         // Display 5 Comment At a time and Next Button for Next 5..
 
-        commenter = logedUser.userName;
+        commenter[commentcount] = loggedUser.userName;
         // Display When there is no Comment
         if (comment[0] == null) {
             System.out.println("-------------------------------");
             System.out.println("\t No Comments Yet");
-            System.out.println("-------------------------------\n");
+            System.out.println("-------------------------------\n\n");
 
             displayCommentsChoice();
         } else {
@@ -456,7 +468,8 @@ class Post {
                     // display all comment
 
                     System.out.println("-------------------------------");
-                    System.out.println("BY:" + commenter + "\n");
+                    System.out.println("BY:" + commenter[i]);
+                    System.out.println("  Replaying to @" + loggedUser.userName + "\n");
                     System.out.println("   " + comment[i]);
                     System.out.println("-------------------------------\n");
 
@@ -469,9 +482,10 @@ class Post {
 
     void displayCommentsChoice() {
 
-        System.out.println(" Back(^) \tADD(+)\n");
+        System.out.println(" Back(^) \tADD(+)\n\n");
         System.out.print("Enter your Choice:");
         String choice = sc.nextLine();
+        System.out.println();
         if (choice.equals("^")) {
             // return to MainPage..
             return;
@@ -527,6 +541,7 @@ class Profile {
             System.out.println("\t\t\t<>                  PROFILE                      <>");
             System.out.println("\t\t\t<>                                               <>");
             System.out.println("\t\t\t<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
+            System.out.println();
             int boxWidth = 38;
             StringBuffer line = new StringBuffer("|");
             String[] words = logedUser.bio.split(" ");
@@ -574,8 +589,8 @@ class Profile {
                     logedUser.goodname = sc.nextLine();
                     break;
                 case 3:
-                    System.out.println("Enter Your Bio");
-                    logedUser.bio = sc.nextLine();
+                System.out.println("Enter Your Bio");
+                loggedUser.bio = sc.nextLine();
                     break;
                 case 4:
                     break;
