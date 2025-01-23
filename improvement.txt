@@ -1,1 +1,1 @@
-1) When Login is Invode Before SignUp , It Recurrsively ask for PassWord  and UserName That Does not Exit.
+1) more the numbe of user more will be the value of randomuser but the randompost remain same thus creates the default message prompt more time than the post

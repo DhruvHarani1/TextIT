@@ -76,6 +76,9 @@ class SignUp {
     String password;
     int ID;
     Post[] P = new Post[100];
+    String[] follower = new String[100];
+    int followCount;
+    
     int postcount = 0;
     // String Email;
     // String SecurityQuestion;
@@ -359,9 +362,9 @@ class MainPage {
                 System.out.println(line + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-                String left = "Like(*)";
+                String left = allUser[randomUser].P[randomPost].likecount + " Like(*)";
                 String center = "Comment(#)";
-                String right = "Follow(@)";
+                String right = allUser[randomUser].followCount + " Follow(@)";
 
                 int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2;
 
@@ -372,7 +375,7 @@ class MainPage {
                 System.out.println("");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
                
-                String left1= "Profile(@)";
+                String left1= "Profile(!)";
                 String center1= "ADD(+)";
                 String right1 ="Next(>)";
                 int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length()))/2;
@@ -393,11 +396,9 @@ class MainPage {
             switch (option) {
                 case "#":
                     allUser[randomUser].P[randomPost].createComment(loggedUser);
-
                     break;
                 case "*":
                 allUser[randomUser].P[randomPost].likemonitor(loggedUser);
-                System.out.print(allUser[randomUser].P[randomPost].likecount);
                     break;
                 case ">":
                     break;
@@ -406,9 +407,12 @@ class MainPage {
                     loggedUser.P[loggedUser.postcount].createPost();
                     loggedUser.postcount++;
                     break;
-                case "@":
+                case "!":
                 PF.profilePage(loggedUser);
                     break;
+                case "@":
+                allUser[randomUser].P[randomPost].follow(loggedUser, allUser[randomUser]);
+                break;
                 case "^":
                     flag = false;
                     break;
@@ -431,10 +435,10 @@ class Post {
 
     // variables
     int likecount=0;
-    String[] whoLiked = new String[100];
-    String post;
-    String[] commenter = new String[100];
     int commentcount;
+    String post;
+    String[] whoLiked = new String[100];
+    String[] commenter = new String[100];
     String[] comment = new String[100];
 
     // class
@@ -519,6 +523,23 @@ class Post {
         }
         if (flag) {
             likecount++;
+        }
+    }
+
+    //Mehtod To follow a User using a post
+    void follow(SignUp loggedUser, SignUp allUser){
+        boolean flag = true;
+
+        for (int i = 0; i < allUser.followCount; i++) {
+            if (allUser.follower[i].equals(loggedUser.userName)) {
+                System.out.println("Already a follower");
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            allUser.follower[allUser.followCount] = loggedUser.userName;
+            allUser.followCount++;
         }
     }
     
