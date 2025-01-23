@@ -295,7 +295,7 @@ class MainPage {
 
 
     // Method to display Main Page Message
-    void homePage(SignUp logedUser, SignUp[] allUser, int totalUser) {
+    void homePage(SignUp loggedUser, SignUp[] allUser, int totalUser) {
 
         // classes
         Scanner sc = new Scanner(System.in);
@@ -308,7 +308,7 @@ class MainPage {
         do {
 
             int randomUser = (int) (Math.random() * totalUser);
-            int randomPost = (int) (Math.random() * logedUser.postcount);
+            int randomPost = (int) (Math.random() * loggedUser.postcount);
 
             // Design is modified and tested here(Vraj)..
             if (allUser[randomUser].P[randomPost] == null) {
@@ -392,22 +392,22 @@ class MainPage {
 
             switch (option) {
                 case "#":
-                    allUser[randomUser].P[randomPost].createComment(logedUser);
+                    allUser[randomUser].P[randomPost].createComment(loggedUser);
 
                     break;
                 case "*":
-                allUser[randomUser].P[randomPost].likemonitor(logedUser);
+                allUser[randomUser].P[randomPost].likemonitor(loggedUser);
                 System.out.print(allUser[randomUser].P[randomPost].likecount);
                     break;
                 case ">":
                     break;
                 case "+":
-                    logedUser.P[logedUser.postcount] = new Post();
-                    logedUser.P[logedUser.postcount].createPost();
-                    logedUser.postcount++;
+                    loggedUser.P[loggedUser.postcount] = new Post();
+                    loggedUser.P[loggedUser.postcount].createPost();
+                    loggedUser.postcount++;
                     break;
                 case "@":
-                PF.profilePage(logedUser);
+                PF.profilePage(loggedUser);
                     break;
                 case "^":
                     flag = false;
@@ -504,10 +504,10 @@ class Post {
     }
 
     //Mehtod To like a Post
-    void likemonitor(SignUp logedUser){
+    void likemonitor(SignUp loggedUser){
         boolean flag = true;
         
-        whoLiked[likecount] = logedUser.userName;
+        whoLiked[likecount] = loggedUser.userName;
 
         for (int i = 0; i < likecount; i++) {
             if ( whoLiked[i].equals(whoLiked[likecount])) {
@@ -530,7 +530,7 @@ class Profile {
     Scanner sc = new Scanner(System.in);
 
     // Method of design of Profile
-    void profilePage(SignUp logedUser) {
+    void profilePage(SignUp loggedUser) {
 
         int choice;
 
@@ -544,13 +544,13 @@ class Profile {
             System.out.println();
             int boxWidth = 38;
             StringBuffer line = new StringBuffer("|");
-            String[] words = logedUser.bio.split(" ");
+            String[] words = loggedUser.bio.split(" ");
 
             System.out.println("****************************************");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| UserName: " + logedUser.userName + " ".repeat(26 - logedUser.userName.length()) + " |");
+            System.out.println("| UserName: " + loggedUser.userName + " ".repeat(26 - loggedUser.userName.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Name: " + logedUser.goodname + " ".repeat(30 - logedUser.goodname.length()) + " |");
+            System.out.println("| Name: " + loggedUser.goodname + " ".repeat(30 - loggedUser.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
 
@@ -586,7 +586,7 @@ class Profile {
                     break;
                 case 2:
                     System.out.print("Enter Name: ");
-                    logedUser.goodname = sc.nextLine();
+                    loggedUser.goodname = sc.nextLine();
                     break;
                 case 3:
                 System.out.println("Enter Your Bio");
