@@ -356,7 +356,7 @@ class MainPage {
                
                 String left1= "Profile(!)"; //profile option to see your profile
                 String center1= "ADD(+)";   //add post option to add your post
-                String right1 ="Next(>)";   //next post option to view next post
+                String right1 ="next(>)";   //next post option to view next post
                 int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length()))/2; //to give dynamic space between options
                 System.out.println("| "+left1 +" ".repeat(spaceBetween1-1)+center1+" ".repeat(spaceBetween1-2)+right1+"|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
