@@ -79,7 +79,6 @@ class SignUp {
     String bio = " ";   //bio of user 
     Post[] P = new Post[100];   //array of object of post of a user
     String[] follower = new String[100];    //array of object of follower of an user
-    // String Email;
     // String SecurityQuestion;
 
     // Classes
@@ -114,7 +113,7 @@ class SignUp {
             mobileNumber = Mobilenumber;    //set mobile number if valid
         }
 
-        // loop for password
+        // loop for password validation
         do {
             System.out.print("Enter Password: ");
             pass = sc.nextLine();
@@ -153,19 +152,8 @@ class SignUp {
         System.out.print("Please enter number : ");
     }
 
-    // Method To Display UserDetails
+    // Method To Display to go back to signup/login/exit page
     public void display() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("#===========  USER Details  ============#");
-        System.out.println("|                                       |");
-
-        System.out.println("|	Username: " + userName + " 		|");
-        System.out.println("|	Password: " + password + "		|");
-        System.out.println("|	Mobile Number: " + mobileNumber + "       |");
-
-        System.out.println("|                                       |");
-        System.out.println("#=======================================#");
-
         System.out.println("Press enter to go back to login/signup page....");
         sc.nextLine();
     }
