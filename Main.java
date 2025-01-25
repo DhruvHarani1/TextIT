@@ -28,29 +28,30 @@ public class Main {
             // entry message display(signup login exit)
             tasks.entryPage();
 
-            userInput = sc.nextInt();   //user input to select between options
+            userInput = sc.nextInt(); // user input to select between options
 
             // switch to select signup/login/exit
             switch (userInput) {
                 case 1:
-                    if (totalUser >= SU.length) {   //to grow the array signup
+                    if (totalUser >= SU.length) { // to grow the array signup
                         SU = tasks.growArray(SU);
                     } else {
-                        SU[totalUser].signUpDetails(SU);    //register the user in app
+                        SU[totalUser].signUpDetails(SU); // register the user in app
                     }
-                    SU[totalUser].display();    //to display the profile of user
-                    SU[totalUser].id(totalUser);    //to give unique id to every user
-                    totalUser++;    //increase the couter of passive user
+                    SU[totalUser].display(); // to display the profile of user
+                    SU[totalUser].id(totalUser); // to give unique id to every user
+                    totalUser++; // increase the couter of passive user
                     break;
 
                 case 2:
-                    if (SU[0].userName == null) {       //if thereare zero users in app till now
+                    if (SU[0].userName == null) { // if thereare zero users in app till now
                         System.out.println("No user yet ");
                         System.out.println("Be the first one to use the app ");
                     } else {
-                        LG.loginDetail();       //  redirecting to login page
-                        int id = LG.verifyLogin(SU);    // id to know which user has loged in app
-                        MP.homePage(SU[id - 1], SU, totalUser); //redirecting to main page (with the loged user SU , whole array SU and totaluser count)
+                        LG.loginDetail(); // redirecting to login page
+                        int id = LG.verifyLogin(SU); // id to know which user has loged in app
+                        MP.homePage(SU[id - 1], SU, totalUser); // redirecting to main page (with the loged user SU ,
+                                                                // whole array SU and totaluser count)
                         break;
                     }
                 case 3:
@@ -58,7 +59,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println(" Please enter correct number!!!");  //if input is not between 1 to 3
+                    System.out.println(" Please enter correct number!!!"); // if input is not between 1 to 3
                     break;
             }
         } while (userInput != 3);
@@ -69,75 +70,75 @@ public class Main {
 class SignUp {
 
     // variables
-    int ID; //give unique id to each user
-    int followCount;    //number of followers
-    int postcount = 0;  //number of post
-    String userName;    //username 
-    String mobileNumber;    //mobilenumber or user
-    String password;    //password to login
-    String goodname = " ";  //name of user(username is different for everuser but name can be same)
-    String bio = " ";   //bio of user 
-    Post[] P = new Post[100];   //array of object of post of a user
-    String[] follower = new String[100];    //array of object of follower of an user
+    int ID; // give unique id to each user
+    int followCount; // number of followers
+    int postcount = 0; // number of post
+    String userName; // username
+    String mobileNumber; // mobilenumber or user
+    String password; // password to login
+    String goodname = " "; // name of user(username is different for everuser but name can be same)
+    String bio = " "; // bio of user
+    Post[] P = new Post[100]; // array of object of post of a user
+    String[] follower = new String[100]; // array of object of follower of an user
     // String SecurityQuestion;
 
     // Classes
     Scanner sc = new Scanner(System.in);
 
     // Method to take SignUp Details
-    public void signUpDetails(SignUp[] SU) {    //takes details like(username , mobilenumber , password)
+    public void signUpDetails(SignUp[] SU) { // takes details like(username , mobilenumber , password)
 
         // variables
-        boolean flag = true;    //to validate the input fields
-        String name;    // the name input by user
-        String Mobilenumber;    //mobile number input by user
-        String pass;    //passwrod input by user
+        boolean flag = true; // to validate the input fields
+        String name; // the name input by user
+        String Mobilenumber; // mobile number input by user
+        String pass; // passwrod input by user
 
         // Loop until valid username is assigned to user
         do {
             System.out.print("Enter Username: ");
             name = sc.nextLine();
-            flag = verifyUserName(name, SU);    //to verify if username is available
+            flag = verifyUserName(name, SU); // to verify if username is available
         } while (!flag);
         {
-            userName = name;    //set username if valid
+            userName = name; // set username if valid
         }
 
-        // loop  until valid mobile number is assign to  user
+        // loop until valid mobile number is assign to user
         do {
             System.out.print("Enter MobileNumber: ");
             Mobilenumber = sc.nextLine();
-            flag = verifyMobileNumber(Mobilenumber, SU);    //to verify mobilenumber
+            flag = verifyMobileNumber(Mobilenumber, SU); // to verify mobilenumber
         } while (!flag);
         {
-            mobileNumber = Mobilenumber;    //set mobile number if valid
+            mobileNumber = Mobilenumber; // set mobile number if valid
         }
 
         // loop for password validation
         do {
             System.out.print("Enter Password: ");
             pass = sc.nextLine();
-            flag = verifyPassWord(pass);    //to verify password
+            flag = verifyPassWord(pass); // to verify password
         } while (!flag);
         {
-            password = pass;    // set password if valid
+            password = pass; // set password if valid
         }
     }
 
     // Method to give unique id to all users
     void id(int totalUser) {
-        ID = totalUser + 1;     //assign id starting from 1;
+        ID = totalUser + 1; // assign id starting from 1;
     }
 
     // Method to Grow The array of object of Signup as a New User Comes
     SignUp[] growArray(SignUp[] grow) {
-        SignUp[] newUser = new SignUp[grow.length + 1];     //new temperory array of signup
+        SignUp[] newUser = new SignUp[grow.length + 1]; // new temperory array of signup
         for (int i = 0; i < grow.length; i++) {
-            newUser[i] = grow[i];                       //to store previous account in new array
+            newUser[i] = grow[i]; // to store previous account in new array
         }
-        newUser[grow.length] = new SignUp();    //object of new user 
-        newUser[grow.length].signUpDetails(newUser);    //redirecting new user to sign up page
-        return newUser; //retrun the new array of object
+        newUser[grow.length] = new SignUp(); // object of new user
+        newUser[grow.length].signUpDetails(newUser); // redirecting new user to sign up page
+        return newUser; // retrun the new array of object
     }
 
     // Method to display entry point Message
@@ -161,40 +162,40 @@ class SignUp {
     // Method to Verify UserName
     public boolean verifyUserName(String name, SignUp[] SU) {
 
-        if (name.isEmpty()) {   //check is input field is empty
+        if (name.isEmpty()) { // check is input field is empty
             System.out.println("Please Enter A Valid UserName!");
             return false;
         }
-        for (int i = 0; i < SU.length; i++) {   //to ceheck if user with same username exist before
-            if (name.equals(SU[i].userName)) {  
+        for (int i = 0; i < SU.length; i++) { // to ceheck if user with same username exist before
+            if (name.equals(SU[i].userName)) {
                 System.out.println("Username already exist try other username.");
                 return false;
             }
         }
-        return true;    //username is valid
+        return true; // username is valid
     }
 
     // Method to verify MobileNumber
     public boolean verifyMobileNumber(String MobileNumber, SignUp[] SU) {
 
-        if (MobileNumber.length() != 10) {  //to validate digit are 10
+        if (MobileNumber.length() != 10) { // to validate digit are 10
             System.out.println("Invalide mobile number it must be of 10 digit retry.");
             return false;
         }
 
-        for (int i = 0; i < MobileNumber.length(); i++) {   // to valide are there only integer values
+        for (int i = 0; i < MobileNumber.length(); i++) { // to valide are there only integer values
             if (MobileNumber.charAt(i) < '0' || MobileNumber.charAt(i) > '9') {
                 System.out.println("Invalide mobile number it must contain only digits retry.");
                 return false;
             }
         }
-        return true;    //mobile number valid
+        return true; // mobile number valid
     }
 
     // Method To verify Password
     public boolean verifyPassWord(String Password) {
 
-        if (Password.length() < 8 || Password.length() > 16) {  // to validate password length should be between 8 to 16
+        if (Password.length() < 8 || Password.length() > 16) { // to validate password length should be between 8 to 16
             System.out.println("Invalide password it must have char between 8 to 16.\nretry .");
             return false;
         }
@@ -209,34 +210,34 @@ class Login {
     Scanner sc = new Scanner(System.in);
 
     // variables
-    String loginName;   //input field for username
-    String loginPassword;   //input field for password
+    String loginName; // input field for username
+    String loginPassword; // input field for password
 
     // Method to take Login details
     public void loginDetail() {
 
         // variables
-        boolean flag = true;    //to validate if user has right credentials(usename,passwrod) to login
+        boolean flag = true; // to validate if user has right credentials(usename,passwrod) to login
 
-        //loop until field is not empty
+        // loop until field is not empty
         do {
             flag = true;
-            System.out.print("Please enter UserName: ");    
+            System.out.print("Please enter UserName: ");
             loginName = sc.nextLine();
 
-            if (loginName.isEmpty()) {      //to ceheck if input field is empty
+            if (loginName.isEmpty()) { // to ceheck if input field is empty
                 System.out.println("UserName Can't Be Blank");
-                flag = false; 
+                flag = false;
             }
         } while (!flag);
 
-        //loop until field is not empty
+        // loop until field is not empty
         do {
             flag = true;
             System.out.print("Please enter Password: ");
             loginPassword = sc.nextLine();
 
-            if (loginPassword.isEmpty()) {  // to check if input field is empty
+            if (loginPassword.isEmpty()) { // to check if input field is empty
                 System.out.println("Password Can't Be Blank");
                 flag = false;
             }
@@ -246,29 +247,29 @@ class Login {
     // Method to verify Login
     public int verifyLogin(SignUp[] SU) {
 
-        boolean flag = false;   //to validate login status
+        boolean flag = false; // to validate login status
 
         int i;
         for (i = 0; i < SU.length; i++) {
-            if (loginName.equals(SU[i].userName) && SU[i].userName != null) {   //usename match
-                if (loginPassword.equals(SU[i].password)) { //passwrod attach to that usename match
-                    flag = true;    //user can login
+            if (loginName.equals(SU[i].userName) && SU[i].userName != null) { // usename match
+                if (loginPassword.equals(SU[i].password)) { // passwrod attach to that usename match
+                    flag = true; // user can login
                 }
                 break;
             }
         }
 
-        if (flag) { //login successful
+        if (flag) { // login successful
             // redirect to main page...
             System.out.println("Thank you for login in our Application.");
-            return SU[i].ID;    //returning id of loged user
-        } else {    //login unsucessful
+            return SU[i].ID; // returning id of loged user
+        } else { // login unsucessful
             i = 0;
             System.out.println("No User Found\n Either Wrong UserName or PassWord");
-            loginDetail();  //recursion for take input again
-            verifyLogin(SU);  
+            loginDetail(); // recursion for take input again
+            verifyLogin(SU);
         }
-        return SU[i].ID;    //return id of loged user
+        return SU[i].ID; // return id of loged user
     }
 }
 
@@ -276,11 +277,11 @@ class Login {
 class MainPage {
 
     // Method to display Main Page Message
-    void homePage(SignUp loggedUser, SignUp[] allUser, int totalUser) { //home page of app
-        
-        //loggeduser --> the person who just login in app
-        //alluser --> ever account on app
-        //totaluser --> count os all user in app
+    void homePage(SignUp loggedUser, SignUp[] allUser, int totalUser) { // home page of app
+
+        // loggeduser --> the person who just login in app
+        // alluser --> ever account on app
+        // totaluser --> count os all user in app
 
         // classes
         Scanner sc = new Scanner(System.in);
@@ -292,11 +293,12 @@ class MainPage {
         // main loop for
         do {
 
-            int randomUser = (int) (Math.random() * totalUser);     //to select random user from all user
-            int randomPost = (int) (Math.random() * loggedUser.postcount);  //to select random post from all post on app
+            int randomUser = (int) (Math.random() * totalUser); // to select random user from all user
+            int randomPost = (int) (Math.random() * loggedUser.postcount); // to select random post from all post on app
 
             // Design is modified and tested here(Vraj)..
-            if (allUser[randomUser].P[randomPost] == null) {    //if the chossen number(random) post is not available then this message is shown
+            if (allUser[randomUser].P[randomPost] == null) { // if the chossen number(random) post is not available then
+                                                             // this message is shown
                 displayLogo();
                 System.out.println("|1) Vraj\t\t\t|");
                 System.out.println("|Hi, i am Vraj moving\t\t|");
@@ -314,12 +316,14 @@ class MainPage {
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                 // BY :
-                String topLine = "| BY: " + allUser[randomUser].userName + " ".repeat(32 - allUser[randomUser].userName.length()) + "|";
+                String topLine = "| BY: " + allUser[randomUser].userName
+                        + " ".repeat(32 - allUser[randomUser].userName.length()) + "|";
                 System.out.println(topLine);
                 System.out.println("|                                     |");
 
                 int contentWidth = 38; // Space for padding and borders
-                String[] words = allUser[randomUser].P[randomPost].post.split(" "); //spliting words of post and storring in an array
+                String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of post and
+                                                                                    // storring in an array
                 StringBuffer line = new StringBuffer("|");
 
                 for (int i = 0; i < words.length; i++) {
@@ -341,64 +345,83 @@ class MainPage {
                     line.append(" ");
                 }
                 System.out.println(line + "|");
+
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                String left = allUser[randomUser].P[randomPost].likecount + " Like(*)"; // to show like option
+                String center = "Comment(#)"; // to show comment option
+                String right = allUser[randomUser].followCount + " Follow(@)"; // to show follow option
+                int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2; // spacing between the
+                System.out.println("| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b" + right + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
-                String left = allUser[randomUser].P[randomPost].likecount + " Like(*)"; //to show like option
-                String center = "Comment(#)";   //to show comment option
-                String right = allUser[randomUser].followCount + " Follow(@)";  //to show follow option
-
-                int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2;   //spacing between the three options
-
-                System.out.println("| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween) + "\b\b\b"  + right + "|");
+                String left1 = "Share($)"; // profile option to see your profile
+                String center1 = ""; // add post option to add your post
+                String right1 = "Next(>)"; // next post option to view next post
+                int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length())) / 2; // to give dynamic
+                System.out.println("| " + left1 + " ".repeat(spaceBetween1 - 1) + center1 + " ".repeat(spaceBetween1 - 2) + right1 + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
                 System.out.println("");
+
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-               
-                String left1= "Profile(!)"; //profile option to see your profile
-                String center1= "ADD(+)";   //add post option to add your post
-                String right1 ="next(>)";   //next post option to view next post
-                int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length()))/2; //to give dynamic space between options
-                System.out.println("| "+left1 +" ".repeat(spaceBetween1-1)+center1+" ".repeat(spaceBetween1-2)+right1+"|");
+                String left2 = "Search(&)"; // Exit option to exit the main page
+                String center2 = "ADD(+)"; // add Share option to share a post
+                String right2 = "Profile(!)"; // search option to search a post
+                int spaceBetween2 = (40 - (left2.length() + center2.length() + right2.length())) / 2; // to give dynamic
+                System.out.println("| " + left2 + " ".repeat(spaceBetween2 - 1) + center2 + " ".repeat(spaceBetween2 - 2) + right2 + "|");
+                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                
+                String left3 = ""; // Exit option to exit the main page
+                String center3 = "Exit(^)"; // add Share option to share a post
+                String right3 = ""; // search option to search a post
+                int spaceBetween3 = (40 - (left3.length() + center3.length() + right3.length())) / 2; // to give dynamic
+                System.out.println("| " + left3 + " ".repeat(spaceBetween3 - 1) + center3 + " ".repeat(spaceBetween3 - 2) + right3 + "|");
                 System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
             }
 
-            System.out.println("7) Press  ^ To Exit!!");
-            System.out.println();
             System.out.println("Enter Your choice :");
 
             String option = sc.next(); // takes option from above
 
             switch (option) {
-                case "#":   //option for comment on a post
+                case "#": // option for comment on a post
                     allUser[randomUser].P[randomPost].createComment(loggedUser);
                     break;
-                case "*":   //option to like post
-                allUser[randomUser].P[randomPost].likemonitor(loggedUser);
+                case "*": // option to like post
+                    allUser[randomUser].P[randomPost].likemonitor(loggedUser);
                     break;
                 case ">":
-                //next post
+                    // next post
                     break;
-                case "+":   //option to add post 
-                    loggedUser.P[loggedUser.postcount] = new Post();    //object for new post
+                case "+": // option to add post
+                    loggedUser.P[loggedUser.postcount] = new Post(loggedUser); // object for new post
                     loggedUser.P[loggedUser.postcount].createPost();
                     loggedUser.postcount++;
                     break;
-                case "!":   //option to view profile
-                PF.profilePage(loggedUser);
+                case "!": // option to view profile
+                    PF.profilePage(loggedUser);
                     break;
-                case "@":   // to follow the user whos post you are seeing
-                allUser[randomUser].P[randomPost].follow(loggedUser, allUser[randomUser]);
-                break;
-                case "^":   //to go back
+                case "@": // to follow the user whos post you are seeing
+                    allUser[randomUser].P[randomPost].follow(loggedUser, allUser[randomUser]);
+                    break;
+                case "^": // to go back
                     flag = false;
+                    break;
+                case "$": // to share a post
+                System.out.println("");
+                System.out.println("Your Sharing Code: " + allUser[randomUser].P[randomPost].shareLink);
+                System.out.println();
+                sc.nextLine();
+                System.out.println("Press enter to continue...");
+                sc.nextLine();
+                    break;
+                case "&": // to search a post
                     break;
                 default:
                     break;
             }
         } while (flag);
     }
-
 
     // Method to display LOGO
     void displayLogo() {
@@ -411,15 +434,31 @@ class MainPage {
 class Post {
 
     // variables
-    int likecount=0;    //like on a post
-    int commentcount;   //comment on a post
-    String post;        //the post to write
-    String[] whoLiked = new String[100];    //th e user who liked the post
-    String[] commentby = new String[100];   //the user who comment on post
-    String[] comment = new String[100]; //array to store the comment
+    int likecount = 0; // like on a post
+    int commentcount; // comment on a post
+    String post; // the post to write
+    String username;
+    int id;
+    String shareLink ="";
+    String[] whoLiked = new String[100]; // th e user who liked the post
+    String[] commentby = new String[100]; // the user who comment on post
+    String[] comment = new String[100]; // array to store the comment
 
     // class
     Scanner sc = new Scanner(System.in);
+
+    Post(){
+        //default constructor
+    }
+
+    Post(SignUp user){
+        username = user.userName;
+        id = (int)(Math.random()*100000000+1);
+        shareLink = username;
+        shareLink = shareLink + id;
+
+    }
+
 
     // Method to Create Post
     void createPost() {
@@ -432,7 +471,7 @@ class Post {
 
         commentby[commentcount] = loggedUser.userName;
         // Display When there is no Comment
-        if (comment[0] == null) {  
+        if (comment[0] == null) {
             System.out.println("-------------------------------");
             System.out.println("\t No Comments Yet");
             System.out.println("-------------------------------\n\n");
@@ -456,7 +495,7 @@ class Post {
         }
     }
 
-    void displayCommentsChoice() {  //display option like add comment or go back
+    void displayCommentsChoice() { // display option like add comment or go back
 
         System.out.println(" Back(^) \tADD(+)\n\n");
         System.out.print("Enter your Choice:");
@@ -479,14 +518,14 @@ class Post {
         displayCommentsChoice();
     }
 
-    //Mehtod To like a Post
-    void likemonitor(SignUp loggedUser){
+    // Mehtod To like a Post
+    void likemonitor(SignUp loggedUser) {
         boolean flag = true;
-        
+
         whoLiked[likecount] = loggedUser.userName;
 
-        for (int i = 0; i < likecount; i++) {   //if a user has arleady liked the post
-            if ( whoLiked[i].equals(whoLiked[likecount])) {
+        for (int i = 0; i < likecount; i++) { // if a user has arleady liked the post
+            if (whoLiked[i].equals(whoLiked[likecount])) {
                 System.out.println("You Have already Liked this post");
                 System.out.println("Cant like more than Once");
                 flag = false;
@@ -498,22 +537,29 @@ class Post {
         }
     }
 
-    //Mehtod To follow a User using a post
-    void follow(SignUp loggedUser, SignUp allUser){
+    // Mehtod To follow a User using a post
+    void follow(SignUp loggedUser, SignUp postUser) {
         boolean flag = true;
 
-        for (int i = 0; i < allUser.followCount; i++) { //if user has arleady followed the account
-            if (allUser.follower[i].equals(loggedUser.userName)) {
+        for (int i = 0; i < postUser.followCount; i++) { // if user has arleady followed the account
+            if (postUser.follower[i].equals(loggedUser.userName)) {
                 System.out.println("Already a follower");
                 flag = false;
                 break;
             }
         }
         if (flag) {
-            allUser.follower[allUser.followCount] = loggedUser.userName;
-            allUser.followCount++;
+            if (postUser.userName.equals(loggedUser.userName)) {
+                System.out.println("Can't follow Your Self");
+                flag = false;
+            }
         }
-    }  
+
+        if (flag) {
+            postUser.follower[postUser.followCount] = loggedUser.userName;
+            postUser.followCount++;
+        }
+    }
 }
 
 class Profile {
@@ -539,7 +585,8 @@ class Profile {
 
             System.out.println("****************************************");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| UserName: " + loggedUser.userName + " ".repeat(26 - loggedUser.userName.length()) + " |");
+            System.out.println(
+                    "| UserName: " + loggedUser.userName + " ".repeat(26 - loggedUser.userName.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
             System.out.println("| Name: " + loggedUser.goodname + " ".repeat(30 - loggedUser.goodname.length()) + " |");
             System.out.println("|" + " ".repeat(boxWidth) + "|");
@@ -580,8 +627,8 @@ class Profile {
                     loggedUser.goodname = sc.nextLine();
                     break;
                 case 3:
-                System.out.println("Enter Your Bio");
-                loggedUser.bio = sc.nextLine();
+                    System.out.println("Enter Your Bio");
+                    loggedUser.bio = sc.nextLine();
                     break;
                 case 4:
                     break;

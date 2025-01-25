@@ -1,1 +1,1 @@
-1) more the numbe of user more will be the value of randomuser but the randompost remain same thus creates the default message prompt more time than the post
+1) insted of random user and random post we will show the post with higesht likes comments and higer the number of follower;
