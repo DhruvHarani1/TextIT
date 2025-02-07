@@ -38,6 +38,7 @@ public class Main {
                     } else {
                         SU[totalUser].signUpDetails(SU); // register the user in app
                     }
+
                     SU[totalUser].display(); // to display the profile of user
                     SU[totalUser].id(totalUser); // to give unique id to every user
                     totalUser++; // increase the couter of passive user
@@ -50,14 +51,13 @@ public class Main {
                     } else {
                         LG.loginDetail(); // redirecting to login page
                         int id = LG.verifyLogin(SU); // id to know which user has loged in app
-                        MP.homePage(SU[id - 1], SU, totalUser); // redirecting to main page (with the loged user SU ,
-                                                                // whole array SU and totaluser count)
+                        MP.homePage(SU[id - 1], SU, totalUser); // redirecting to main page (with the loged user SU
+                                                                // ,whole array SU and totaluser count)
                         break;
                     }
                 case 3:
                     // exit to get out of app
                     break;
-
                 default:
                     System.out.println(" Please enter correct number!!!"); // if input is not between 1 to 3
                     break;
@@ -71,18 +71,19 @@ class SignUp {
 
     // variables
     int ID; // give unique id to each user
-    int followCount; // number of followers
-    int postcount = 0; // number of post
+    int firstTimeAppUsed = 0; // when user first time uses app
     String userName; // username
     String mobileNumber; // mobilenumber or user
     String password; // password to login
     String goodname = " "; // name of user(username is different for everuser but name can be same)
     String bio = " "; // bio of user
     Post[] P = new Post[100]; // array of object of post of a user
+    int postcount = 0; // number of post
     String[] follower = new String[100]; // array of object of follower of an user
+    int followCount; // number of followers
     // String SecurityQuestion;
 
-    // Classes
+    // Classes/objects
     Scanner sc = new Scanner(System.in);
 
     // Method to take SignUp Details
@@ -100,6 +101,7 @@ class SignUp {
             name = sc.nextLine();
             flag = verifyUserName(name, SU); // to verify if username is available
         } while (!flag);
+
         {
             userName = name; // set username if valid
         }
@@ -110,6 +112,7 @@ class SignUp {
             Mobilenumber = sc.nextLine();
             flag = verifyMobileNumber(Mobilenumber, SU); // to verify mobilenumber
         } while (!flag);
+
         {
             mobileNumber = Mobilenumber; // set mobile number if valid
         }
@@ -120,6 +123,7 @@ class SignUp {
             pass = sc.nextLine();
             flag = verifyPassWord(pass); // to verify password
         } while (!flag);
+
         {
             password = pass; // set password if valid
         }
@@ -186,6 +190,13 @@ class SignUp {
         for (int i = 0; i < MobileNumber.length(); i++) { // to valide are there only integer values
             if (MobileNumber.charAt(i) < '0' || MobileNumber.charAt(i) > '9') {
                 System.out.println("Invalide mobile number it must contain only digits retry.");
+                return false;
+            }
+        }
+
+        for (int i = 0; i < SU.length; i++) {
+            if (MobileNumber.equals(SU[i].mobileNumber)) {
+                System.out.println("Mobile Number already exist try other Number.");
                 return false;
             }
         }
@@ -281,10 +292,10 @@ class MainPage {
     void homePage(SignUp loggedUser, SignUp[] allUser, int totalUser) { // home page of app
 
         // loggeduser --> the person who just login in app
-        // alluser --> ever account on app
-        // totaluser --> count os all user in app
+        // alluser --> every account on app
+        // totaluser --> count of all user in app
 
-        // classes
+        // classes & objects
         Scanner sc = new Scanner(System.in);
         Profile PF = new Profile();
 
@@ -293,18 +304,21 @@ class MainPage {
 
         // main loop for
         do {
+            int randomUser; // to select random user from all user
+            int randomPost; // to select random post from all post on app
 
-            int randomUser = (int) (Math.random() * totalUser); // to select random user from all user
-            int randomPost = (int) (Math.random() * loggedUser.postcount); // to select random post from all post on app
+            do {
+                randomUser = (int) (Math.random() * totalUser);
+                randomPost = (int) (Math.random() * loggedUser.postcount);
+            } while (allUser[randomUser].P[randomPost] == null && allUser[randomUser].firstTimeAppUsed != 0);
 
             // Design is modified and tested here(Vraj)..
             if (allUser[randomUser].P[randomPost] == null) { // if the chossen number(random) post is not available then
                                                              // this message is shown
                 displayLogo();
-                System.out.println("|1) Vraj\t\t\t|");
-                System.out.println("|Hi, i am Vraj moving\t\t|");
-                System.out.println("|to a new cityin Dubai.\t\t|");
-                System.out.println("|I am Glad to be here\t\t|");
+                System.out.println("|Hi, Welcome to TextIT\t\t|");
+                System.out.println("|Lets Start by posting\t\t|");
+                System.out.println("|The very first Post  \t\t|");
                 System.out.println("|\t\t\t\t|");
                 System.out.println("|-------------------------------|");
                 System.out.println("|            ADD(+)\t        |");
@@ -384,8 +398,7 @@ class MainPage {
 
             }
 
-            System.out.println("Enter Your choice :");
-
+            System.out.print("Enter Your choice: ");
             String option = sc.next(); // takes option from above
 
             switch (option) {
@@ -399,6 +412,7 @@ class MainPage {
                     // next post
                     break;
                 case "+": // option to add post
+                    loggedUser.firstTimeAppUsed++;
                     loggedUser.P[loggedUser.postcount] = new Post(loggedUser); // object for new post
                     loggedUser.P[loggedUser.postcount].createPost();
                     loggedUser.postcount++;
@@ -424,24 +438,21 @@ class MainPage {
                     sc.nextLine();
                     System.out.print("Enter Link: ");
                     String search = sc.nextLine().trim();
-                    int totalSpace = 40;
+                    int totalSpace = 39;
                     int spaceLeft = totalSpace - 10;
                     int spaceBetween = spaceLeft - search.length();
                     System.out.println("\t\t" + "-".repeat(totalSpace)); // first
                     System.out.println("\t\t" + "|Search: " + search + " ".repeat(spaceBetween) + "|"); // second
-                    System.out.println("\t\t" + "-".repeat(totalSpace));
-                    System.out.println(); // third
-                    for (int i = 0; i < allUser.length; i++) {
-                        for (int j = 0; j < allUser[i].postcount; j++) {
-                            if( allUser[i].P[j].shareLink ==null){
-                                break;
-                            }
-                            else if (allUser[i].P[j].shareLink.equals(search) ) {
-                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-                                System.out.println("\t\t|\t       TEXTIT    \t      |");
-                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                    System.out.println("\t\t" + "-".repeat(totalSpace)); // third
 
-                                // BY :
+                    for (int i = 0; i < allUser.length; i++) {
+
+                        for (int j = 0; j < allUser[i].postcount; j++) {
+
+                            if (allUser[i].P[j].shareLink == null) {
+                                break;
+                            } else if (allUser[i].P[j].shareLink.equals(search)) {
+
                                 String topLine = "\t\t| BY: " + allUser[randomUser].userName
                                         + " ".repeat(32 - allUser[randomUser].userName.length()) + "|";
                                 System.out.println(topLine);
@@ -449,20 +460,19 @@ class MainPage {
 
                                 int contentWidth = 38; // Space for padding and borders
                                 String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of
-                                                                                                    // post and
-                                                                                                    // storring in an
-                                                                                                    // array
+                                                                                                    // post and storring
+                                                                                                    // in an array
                                 StringBuffer line = new StringBuffer("\t\t|");
 
                                 for (int k = 0; k < words.length; k++) {
                                     if (line.length() + words[k].length() + 1 > contentWidth) {
                                         // Fill the remaining spaces in the current line
-                                        while (line.length() < contentWidth) {
+                                        while (line.length() <= contentWidth) {
                                             line.append(" ");
                                         }
-                                        System.out.println(line + "|");
-                                        line = new StringBuffer("\t\t| " + words[k]); // Start a new line with the current
-                                                                                  // word
+                                        System.out.println(line + " |");
+                                        line = new StringBuffer("\t\t| " + words[k]); // Start a new line with the
+                                                                                      // current word
                                     } else {
                                         line.append(" ");
                                         line.append(words[k]);
@@ -470,22 +480,52 @@ class MainPage {
                                 }
 
                                 // Fill the remaining spaces in the last line
-                                while (line.length() < contentWidth) {
+                                while (line.length() <= contentWidth) {
                                     line.append(" ");
                                 }
-                                System.out.println(line + "|");
+                                System.out.println(line + " |");
 
                                 System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
                                 String left = allUser[randomUser].P[randomPost].likecount + " Like(*)"; // to show like
                                                                                                         // option
                                 String center = "Comment(#)"; // to show comment option
                                 String right = allUser[randomUser].followCount + " Follow(@)"; // to show follow option
-                                int spaceBetween1 = (40 - (left.length() + center.length() + right.length())) / 2; // spacing
-                                                                                                                  // between
-                                                                                                                  // the
+                                int spaceBetween1 = (40 - (left.length() + center.length() + right.length())) / 2; // spacing between the
                                 System.out.println("\t\t| " + left + " ".repeat(spaceBetween1 - 1) + center
                                         + " ".repeat(spaceBetween1) + "\b\b\b" + right + "|");
                                 System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+
+                                String left3 = ""; // Exit option to exit the main page
+                                String center3 = "Back(^)"; // add Share option to share a post
+                                String right3 = ""; // search option to search a post
+                                int spaceBetween3 = (40 - (left3.length() + center3.length() + right3.length())) / 2; // to
+                                                                                                                      // give
+                                                                                                                      // dynamic
+                                System.out.println("| " + left3 + " ".repeat(spaceBetween3 - 1) + center3
+                                        + " ".repeat(spaceBetween3 - 2) + right3 + "|");
+                                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+
+                                do {
+                                    System.out.print("Enter Your choice: ");
+                                    option = sc.next(); // takes option from above
+
+                                    switch (option) {
+                                        case "*":
+                                            allUser[randomUser].P[randomPost].likemonitor(loggedUser);
+                                            break;
+                                        case "#":
+                                            allUser[randomUser].P[randomPost].createComment(loggedUser);
+                                            break;
+                                        case "@":
+                                            allUser[randomUser].P[randomPost].follow(loggedUser, allUser[randomUser]);
+                                            break;
+                                        case "^":
+                                            break;
+                                        default:
+                                            System.out.println("\nEnter correct Symbol\n");
+                                            break;
+                                    }
+                                } while (!option.equals("^"));
 
                             }
                         }
