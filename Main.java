@@ -210,7 +210,7 @@ class Login {
     Scanner sc = new Scanner(System.in);
 
     // variables
-    String loginName; // input field for username
+    String loginNameOrNumber; // input field for username/number
     String loginPassword; // input field for password
 
     // Method to take Login details
@@ -222,11 +222,11 @@ class Login {
         // loop until field is not empty
         do {
             flag = true;
-            System.out.print("Please enter UserName: ");
-            loginName = sc.nextLine();
+            System.out.print("Please enter UserName/Mobile Number: ");
+            loginNameOrNumber = sc.nextLine();
 
-            if (loginName.isEmpty()) { // to ceheck if input field is empty
-                System.out.println("UserName Can't Be Blank");
+            if (loginNameOrNumber.isEmpty()) { // to ceheck if input field is empty
+                System.out.println("\nUserName/Mobile number Can't Be Blank\n");
                 flag = false;
             }
         } while (!flag);
@@ -238,7 +238,7 @@ class Login {
             loginPassword = sc.nextLine();
 
             if (loginPassword.isEmpty()) { // to check if input field is empty
-                System.out.println("Password Can't Be Blank");
+                System.out.println("\nPassword Can't Be Blank\n");
                 flag = false;
             }
         } while (!flag);
@@ -251,8 +251,8 @@ class Login {
 
         int i;
         for (i = 0; i < SU.length; i++) {
-            if (loginName.equals(SU[i].userName) && SU[i].userName != null) { // usename match
-                if (loginPassword.equals(SU[i].password)) { // passwrod attach to that usename match
+            if(loginNameOrNumber.equals(SU[i].userName) || loginNameOrNumber.equals(SU[i].mobileNumber)) { // usename match
+                if (loginPassword.equals(SU[i].password)) { // passwrod attach to that usename/mobile number match
                     flag = true; // user can login
                 }
                 break;
@@ -456,7 +456,6 @@ class Post {
         id = (int)(Math.random()*100000000+1);
         shareLink = username;
         shareLink = shareLink + id;
-
     }
 
 
@@ -485,7 +484,7 @@ class Post {
                     // display all comment
                     System.out.println("-------------------------------");
                     System.out.println("BY:" + commentby[i]);
-                    System.out.println("  Replaying to @" + loggedUser.userName + "\n");
+                    System.out.println("  Replaying to @" + username + "\n");
                     System.out.println("   " + comment[i]);
                     System.out.println("-------------------------------\n");
 
