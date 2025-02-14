@@ -145,17 +145,21 @@ class SignUp {
         return newUser; // retrun the new array of object
     }
 
-    // Method to display entry point Message
-    public void entryPage() {
-        System.out.println("#============  LOGIN/SIGNUP  ============#");
-        System.out.println("|					 |");
-        System.out.println("|	Enter 1 for SignUp		 |");
-        System.out.println("|	Enter 2 for Login		 |");
-        System.out.println("|	Enter 3 for EXIT		 |");
-        System.out.println("|				  	 |");
-        System.out.println("#========================================#");
+     // Method to display entry point Message
+     public void entryPage() {
+        System.out.println();
+        System.out.println();
+        System.out.println("/////////////  LOGIN/SIGNUP  /////////////");
+        System.out.println("/					 /");
+        System.out.println("/	  Enter 1 for SignUp	         /");
+        System.out.println("/	  Enter 2 for Login		 /");
+        System.out.println("/	  Enter 3 for EXIT		 /");
+        System.out.println("/				  	 /");
+        System.out.println("//////////////////////////////////////////");
+        System.out.println();
         System.out.print("Please enter number : ");
     }
+
 
     // Method To Display to go back to signup/login/exit page
     public void display() {
@@ -230,9 +234,13 @@ class Login {
         // variables
         boolean flag = true; // to validate if user has right credentials(usename,passwrod) to login
 
+        
+
         // loop until field is not empty
         do {
             flag = true;
+
+            
             System.out.print("Please enter UserName/Mobile Number: ");
             loginNameOrNumber = sc.nextLine();
 
@@ -252,6 +260,7 @@ class Login {
                 System.out.println("\nPassword Can't Be Blank\n");
                 flag = false;
             }
+                                          
         } while (!flag);
     }
 
@@ -313,22 +322,21 @@ class MainPage {
             } while (allUser[randomUser].P[randomPost] == null && allUser[randomUser].firstTimeAppUsed != 0);
 
             // Design is modified and tested here(Vraj)..
-            if (allUser[randomUser].P[randomPost] == null) { // if the chossen number(random) post is not available then
-                                                             // this message is shown
+            if (allUser[randomUser].P[randomPost] == null) { // if the chossen number(random) post is not available then // this message is shown
                 displayLogo();
                 System.out.println("|Hi, Welcome to TextIT\t\t|");
                 System.out.println("|Lets Start by posting\t\t|");
                 System.out.println("|The very first Post  \t\t|");
                 System.out.println("|\t\t\t\t|");
-                System.out.println("|-------------------------------|");
-                System.out.println("|            ADD(+)\t        |");
-                System.out.println("|-------------------------------|");
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                System.out.println("x            ADD(+)\t        x");
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 System.out.println();
             } else {
 
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-                System.out.println("|\t       TEXTIT    \t      |");
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                System.out.println("|#####################################|");
+                System.out.println("|\t        TEXTIT \t              |");
+                System.out.println("|#####################################|");
 
                 // BY :
                 String topLine = "| BY: " + allUser[randomUser].userName
@@ -361,14 +369,14 @@ class MainPage {
                 }
                 System.out.println(line + "|");
 
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                System.out.println("|=====================================|");
                 String left = allUser[randomUser].P[randomPost].likecount + " Like(*)"; // to show like option
                 String center = "Comment(#)"; // to show comment option
                 String right = allUser[randomUser].followCount + " Follow(@)"; // to show follow option
                 int spaceBetween = (40 - (left.length() + center.length() + right.length())) / 2; // spacing between the
                 System.out.println("| " + left + " ".repeat(spaceBetween - 1) + center + " ".repeat(spaceBetween)
                         + "\b\b\b" + right + "|");
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                        System.out.println("|=====================================|");
 
                 String left1 = "Share($)"; // profile option to see your profile
                 String center1 = ""; // add post option to add your post
@@ -376,17 +384,17 @@ class MainPage {
                 int spaceBetween1 = (40 - (left1.length() + center1.length() + right1.length())) / 2; // to give dynamic
                 System.out.println("| " + left1 + " ".repeat(spaceBetween1 - 1) + center1
                         + " ".repeat(spaceBetween1 - 2) + right1 + "|");
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-                System.out.println("");
+                        System.out.println("|=====================================|");
+                        System.out.println("");
 
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-                String left2 = "Search(&)"; // Exit option to exit the main page
+                        System.out.println("|=====================================|");
+                        String left2 = "Search(&)"; // Exit option to exit the main page
                 String center2 = "ADD(+)"; // add Share option to share a post
                 String right2 = "Profile(!)"; // search option to search a post
                 int spaceBetween2 = (40 - (left2.length() + center2.length() + right2.length())) / 2; // to give dynamic
                 System.out.println("| " + left2 + " ".repeat(spaceBetween2 - 1) + center2
                         + " ".repeat(spaceBetween2 - 2) + right2 + "|");
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                        System.out.println("|=====================================|");
 
                 String left3 = ""; // Exit option to exit the main page
                 String center3 = "Exit(^)"; // add Share option to share a post
@@ -394,7 +402,7 @@ class MainPage {
                 int spaceBetween3 = (40 - (left3.length() + center3.length() + right3.length())) / 2; // to give dynamic
                 System.out.println("| " + left3 + " ".repeat(spaceBetween3 - 1) + center3
                         + " ".repeat(spaceBetween3 - 2) + right3 + "|");
-                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                        System.out.println("|=====================================|");
 
             }
 
