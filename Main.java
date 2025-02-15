@@ -75,12 +75,13 @@ class SignUp {
     String userName; // username
     String mobileNumber; // mobilenumber or user
     String password; // password to login
-    String goodname = " "; // name of user(username is different for everuser but name can be same)
-    String bio = " "; // bio of user
+    String goodname = "press @ to set name"; // name of user(username is different for everuser but name can be same)
+    String bio = "press # to set Bio"; // bio of user
     Post[] P = new Post[100]; // array of object of post of a user
     int postcount = 0; // number of post
     String[] follower = new String[100]; // array of object of follower of an user
     int followCount; // number of followers
+    int followingCount=0;// number of person user follows
     // String SecurityQuestion;
 
     // Classes/objects
@@ -676,6 +677,7 @@ class Post {
         }
 
         if (flag) {
+            loggedUser.followingCount++;
             postUser.follower[postUser.followCount] = loggedUser.userName;
             postUser.followCount++;
         }
@@ -690,27 +692,96 @@ class Profile {
     // Method of design of Profile
     void profilePage(SignUp loggedUser) {
 
-        int choice;
+        String choice;
         do {
-            System.out.println("");
-            System.out.println("\t\t\t<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
-            System.out.println("\t\t\t<>                                               <>");
-            System.out.println("\t\t\t<>                  PROFILE                      <>");
-            System.out.println("\t\t\t<>                                               <>");
-            System.out.println("\t\t\t<*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>");
-            System.out.println();
-            int boxWidth = 38;
-            StringBuffer line = new StringBuffer("|");
-            String[] words = loggedUser.bio.split(" ");
 
-            System.out.println("****************************************");
-            System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println(
-                    "| UserName: " + loggedUser.userName + " ".repeat(26 - loggedUser.userName.length()) + " |");
-            System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Name: " + loggedUser.goodname + " ".repeat(30 - loggedUser.goodname.length()) + " |");
-            System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("| Bio: " + " ".repeat(boxWidth - 6) + "|");
+            int boxWidth = 50; // width of the box of profile
+
+            // User name of user
+            String left = "";
+            String center = "@" + loggedUser.userName;
+            String right = "";
+            int spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
+
+            System.out.println("|" + "~".repeat(boxWidth-2) + "|");
+            System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t\t |");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("|" + "~".repeat(boxWidth-2) + "|");
+
+            // Name of user
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("| Name: " + loggedUser.goodname + " ".repeat(boxWidth - (10 + loggedUser.goodname.length())) + " |");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+
+            // All type of Count's
+            int leftCount = loggedUser.postcount;
+            int centerCount = loggedUser.followCount;
+            int rightCount = loggedUser.followingCount;
+            spacebetween = boxWidth/3;
+            System.out.println("| " + leftCount + " ".repeat(spacebetween-1) + centerCount + " ".repeat(spacebetween-1) + rightCount + " ".repeat(spacebetween -3) + " |");
+
+            // describe which count is it
+            left = "posts";
+            center = "followers";
+            right = "following";
+            spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
+            System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t |");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+
+            //Bio
+            System.out.println("|" + "-".repeat(boxWidth-2) + "|");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("| BIO " + " ".repeat(boxWidth-8) + " |");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            wordWrapper(boxWidth-2, loggedUser);
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("|" + "-".repeat(boxWidth-2) + "|");
+
+
+            //edit buttons
+            left = "Edit Name(@)";
+            center = "";
+            right = "Edit Bio(#)";
+            spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t |");
+            System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
+            System.out.println("|" + "-".repeat(boxWidth-2) + "|");
+
+            //exit button
+            left = "";
+            center = "Exit(^)";
+            right = "";
+            spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
+            System.out.println("| " + left + " ".repeat(spacebetween) +"\t" + center + " ".repeat(spacebetween) + right +"\t |");
+            System.out.println("|" + "-".repeat(boxWidth-2) + "|");
+
+
+            choice = sc.nextLine();
+            switch (choice) {
+                //case 1:
+                  //  break;
+                case "@":
+                    System.out.print("Enter Name: ");
+                    loggedUser.goodname = sc.nextLine();
+                    break;
+                case "#":
+                    System.out.println("Enter Your Bio");
+                    loggedUser.bio = sc.nextLine();
+                    break;
+                case "^":
+                    break;
+                default:
+                    break;
+            }
+        } while (!choice.equals("^"));
+    }
+
+    void wordWrapper(int boxWidth , SignUp loggedUser){
+        StringBuffer line = new StringBuffer("|");
+            String[] words = loggedUser.bio.split(" ");
 
             for (int i = 0; i < words.length; i++) {
                 if (line.length() + words[i].length() + 1 > boxWidth) {
@@ -728,33 +799,7 @@ class Profile {
             while (line.length() <= boxWidth) {
                 line.append(" ");
             }
-
             System.out.println(line + "|");
-            System.out.println("|" + " ".repeat(boxWidth) + "|");
-            System.out.println("****************************************");
-
-            System.out.println("1. Edit Username");
-            System.out.println("2. Edit Name");
-            System.out.println("3. Edit Bio");
-            System.out.println("4. Back to Menu");
-            choice = sc.nextInt();
-            sc.nextLine();
-            switch (choice) {
-                case 1:
-                    break;
-                case 2:
-                    System.out.print("Enter Name: ");
-                    loggedUser.goodname = sc.nextLine();
-                    break;
-                case 3:
-                    System.out.println("Enter Your Bio");
-                    loggedUser.bio = sc.nextLine();
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
-            }
-        } while (choice != 4);
     }
 }
+
