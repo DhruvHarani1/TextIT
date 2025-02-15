@@ -46,8 +46,10 @@ public class Main {
 
                 case 2:
                     if (SU[0].userName == null) { // if thereare zero users in app till now
+                        System.out.println();
                         System.out.println("No user yet ");
                         System.out.println("Be the first one to use the app ");
+                        System.out.println();
                     } else {
                         LG.loginDetail(); // redirecting to login page
                         int id = LG.verifyLogin(SU); // id to know which user has loged in app
@@ -59,7 +61,9 @@ public class Main {
                     // exit to get out of app
                     break;
                 default:
+                System.out.println();
                     System.out.println(" Please enter correct number!!!"); // if input is not between 1 to 3
+                    System.out.println();
                     break;
             }
         } while (userInput != 3);
@@ -98,6 +102,7 @@ class SignUp {
 
         // Loop until valid username is assigned to user
         do {
+            System.out.println();
             System.out.print("Enter Username: ");
             name = sc.nextLine();
             flag = verifyUserName(name, SU); // to verify if username is available
@@ -109,6 +114,7 @@ class SignUp {
 
         // loop until valid mobile number is assign to user
         do {
+            System.out.println();
             System.out.print("Enter MobileNumber: ");
             Mobilenumber = sc.nextLine();
             flag = verifyMobileNumber(Mobilenumber, SU); // to verify mobilenumber
@@ -120,6 +126,7 @@ class SignUp {
 
         // loop for password validation
         do {
+            System.out.println();
             System.out.print("Enter Password: ");
             pass = sc.nextLine();
             flag = verifyPassWord(pass); // to verify password
@@ -158,13 +165,15 @@ class SignUp {
         System.out.println("/				  	 /");
         System.out.println("//////////////////////////////////////////");
         System.out.println();
-        System.out.print("Please enter number : ");
+        System.out.print("Enter number : ");
     }
 
 
     // Method To Display to go back to signup/login/exit page
     public void display() {
+        System.out.println();
         System.out.println("Press enter to go back to login/signup page....");
+        System.out.println();
         sc.nextLine();
     }
 
@@ -172,12 +181,16 @@ class SignUp {
     public boolean verifyUserName(String name, SignUp[] SU) {
 
         if (name.isEmpty()) { // check is input field is empty
+            System.out.println();
             System.out.println("Please Enter A Valid UserName!");
+            System.out.println();
             return false;
         }
         for (int i = 0; i < SU.length; i++) { // to ceheck if user with same username exist before
             if (name.equals(SU[i].userName)) {
+                System.out.println();
                 System.out.println("Username already exist try other username.");
+                System.out.println();
                 return false;
             }
         }
@@ -188,20 +201,26 @@ class SignUp {
     public boolean verifyMobileNumber(String MobileNumber, SignUp[] SU) {
 
         if (MobileNumber.length() != 10) { // to validate digit are 10
+            System.out.println();
             System.out.println("Invalide mobile number it must be of 10 digit retry.");
+            System.out.println();
             return false;
         }
 
         for (int i = 0; i < MobileNumber.length(); i++) { // to valide are there only integer values
             if (MobileNumber.charAt(i) < '0' || MobileNumber.charAt(i) > '9') {
+                System.out.println();
                 System.out.println("Invalide mobile number it must contain only digits retry.");
+                System.out.println();
                 return false;
             }
         }
 
         for (int i = 0; i < SU.length; i++) {
             if (MobileNumber.equals(SU[i].mobileNumber)) {
+                System.out.println();
                 System.out.println("Mobile Number already exist try other Number.");
+                System.out.println();
                 return false;
             }
         }
@@ -212,7 +231,9 @@ class SignUp {
     public boolean verifyPassWord(String Password) {
 
         if (Password.length() < 8 || Password.length() > 16) { // to validate password length should be between 8 to 16
+            System.out.println();
             System.out.println("Invalide password it must have char between 8 to 16.\nretry .");
+            System.out.println();
             return false;
         }
         return true; // passwrod is valid
@@ -240,8 +261,7 @@ class Login {
         // loop until field is not empty
         do {
             flag = true;
-
-            
+            System.out.println();
             System.out.print("Please enter UserName/Mobile Number: ");
             loginNameOrNumber = sc.nextLine();
 
@@ -254,6 +274,7 @@ class Login {
         // loop until field is not empty
         do {
             flag = true;
+            System.out.println();
             System.out.print("Please enter Password: ");
             loginPassword = sc.nextLine();
 
@@ -272,8 +293,7 @@ class Login {
 
         int i;
         for (i = 0; i < SU.length; i++) {
-            if (loginNameOrNumber.equals(SU[i].userName) || loginNameOrNumber.equals(SU[i].mobileNumber)) { // usename
-                                                                                                            // match
+            if (loginNameOrNumber.equals(SU[i].userName) || loginNameOrNumber.equals(SU[i].mobileNumber)) { // usename match
                 if (loginPassword.equals(SU[i].password)) { // passwrod attach to that usename/mobile number match
                     flag = true; // user can login
                 }
@@ -282,12 +302,10 @@ class Login {
         }
 
         if (flag) { // login successful
-            // redirect to main page...
-            System.out.println("Thank you for login in our Application.");
             return SU[i].ID; // returning id of loged user
         } else { // login unsucessful
             i = 0;
-            System.out.println("No User Found\n Either Wrong UserName or PassWord");
+            System.out.println("\nNo User Found\n Either Wrong UserName or PassWord\n");
             loginDetail(); // recursion for take input again
             verifyLogin(SU);
         }
@@ -409,13 +427,16 @@ class MainPage {
 
             System.out.print("Enter Your choice: ");
             String option = sc.next(); // takes option from above
+            System.out.println();
 
             switch (option) {
                 case "#": // option for comment on a post
                     allUser[randomUser].P[randomPost].createComment(loggedUser);
+                    System.out.println();
                     break;
                 case "*": // option to like post
                     allUser[randomUser].P[randomPost].likemonitor(loggedUser);
+                    System.out.println();
                     break;
                 case ">":
                     // next post
@@ -425,12 +446,15 @@ class MainPage {
                     loggedUser.P[loggedUser.postcount] = new Post(loggedUser); // object for new post
                     loggedUser.P[loggedUser.postcount].createPost();
                     loggedUser.postcount++;
+                    System.out.println();
                     break;
                 case "!": // option to view profile
                     PF.profilePage(loggedUser);
+                    System.out.println();
                     break;
                 case "@": // to follow the user whos post you are seeing
                     allUser[randomUser].P[randomPost].follow(loggedUser, allUser[randomUser]);
+                    System.out.println();
                     break;
                 case "^": // to go back
                     flag = false;
@@ -442,6 +466,7 @@ class MainPage {
                     sc.nextLine();
                     System.out.println("Press enter to continue...");
                     sc.nextLine();
+                    System.out.println();
                     break;
                 case "&": // to search a p
                     sc.nextLine();
@@ -539,6 +564,7 @@ class MainPage {
                             }
                         }
                     }
+                    System.out.println();
                     break;
                 default:
                     break;
@@ -548,6 +574,7 @@ class MainPage {
 
     // Method to display LOGO
     void displayLogo() {
+        System.out.println();
         System.out.println("|-------------------------------|");
         System.out.println("|\t    TEXTIT \t        |");
         System.out.println("|-------------------------------|");
@@ -585,6 +612,7 @@ class Post {
     void createPost() {
         System.out.println("Enter Post:");
         post = sc.nextLine();
+        System.out.println();
     }
 
     // Method to Comment
@@ -647,8 +675,10 @@ class Post {
 
         for (int i = 0; i < likecount; i++) { // if a user has arleady liked the post
             if (whoLiked[i].equals(whoLiked[likecount])) {
+                System.out.println();
                 System.out.println("You Have already Liked this post");
                 System.out.println("Cant like more than Once");
+                System.out.println();
                 flag = false;
                 break;
             }
@@ -664,14 +694,18 @@ class Post {
 
         for (int i = 0; i < postUser.followCount; i++) { // if user has arleady followed the account
             if (postUser.follower[i].equals(loggedUser.userName)) {
+                System.out.println();
                 System.out.println("Already a follower");
+                System.out.println();
                 flag = false;
                 break;
             }
         }
         if (flag) {
             if (postUser.userName.equals(loggedUser.userName)) {
+                System.out.println();
                 System.out.println("Can't follow Your Self");
+                System.out.println();
                 flag = false;
             }
         }
