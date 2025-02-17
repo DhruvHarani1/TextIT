@@ -732,13 +732,17 @@ class Profile {
             int boxWidth = 50; // width of the box of profile
 
             // User name of user
-            String left = "";
+            //String left = "";
             String center = "@" + loggedUser.userName;
-            String right = "";
-            int spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
+            //String right = "";
+            int spacebetween = (boxWidth - (center.length())-2)/2 ;
 
             System.out.println("|" + "~".repeat(boxWidth-2) + "|");
-            System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t\t |");
+            // Logic for Middling of Username even when length of center is odd/even 
+            if(center.length()%2==1)
+            System.out.println("| "+ " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + "|");
+            else
+            System.out.println("| "+ " ".repeat(spacebetween-1) + center + " ".repeat(spacebetween) + "|");
             System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
             System.out.println("|" + "~".repeat(boxWidth-2) + "|");
 
@@ -757,9 +761,9 @@ class Profile {
             System.out.println("| " + leftCount + " ".repeat(spacebetween-1) + centerCount + " ".repeat(spacebetween-1) + rightCount + " ".repeat(spacebetween -3) + " |");
 
             // describe which count is it
-            left = "posts";
+            String left = "posts";
             center = "followers";
-            right = "following";
+            String right = "following";
             spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
             System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t |");
             System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
@@ -777,7 +781,7 @@ class Profile {
             //edit buttons
             left = "Edit Name(@)";
             center = "";
-            right = "Edit Bio(#)";
+             right = "Edit Bio(#)";
             spacebetween = (boxWidth - ( left.length() + center.length() + right.length() )) / 3;
             System.out.println("|" + " ".repeat(boxWidth - 2) + "|");
             System.out.println("| " + left + " ".repeat(spacebetween) + center + " ".repeat(spacebetween) + right +"\t |");
