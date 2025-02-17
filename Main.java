@@ -53,8 +53,7 @@ public class Main {
                     } else {
                         LG.loginDetail(); // redirecting to login page
                         int id = LG.verifyLogin(SU); // id to know which user has loged in app
-                        MP.homePage(SU[id - 1], SU, totalUser); // redirecting to main page (with the loged user SU
-                                                                // ,whole array SU and totaluser count)
+                        MP.homePage(SU[id - 1], SU, totalUser); // redirecting to main page (with the loged user SU// ,whole array SU and totaluser count)
                         break;
                     }
                 case 3:
@@ -243,7 +242,7 @@ class SignUp {
 // Class Login
 class Login {
 
-    // classes
+    // classes and there objects
     Scanner sc = new Scanner(System.in);
 
     // variables
@@ -255,8 +254,6 @@ class Login {
 
         // variables
         boolean flag = true; // to validate if user has right credentials(usename,passwrod) to login
-
-        
 
         // loop until field is not empty
         do {
@@ -305,7 +302,7 @@ class Login {
             return SU[i].ID; // returning id of loged user
         } else { // login unsucessful
             i = 0;
-            System.out.println("\nNo User Found\n Either Wrong UserName or PassWord\n");
+            System.out.println("\nNo User Found\nEither Wrong UserName or PassWord\n");
             loginDetail(); // recursion for take input again
             verifyLogin(SU);
         }
@@ -535,9 +532,9 @@ class MainPage {
                                 int spaceBetween3 = (40 - (left3.length() + center3.length() + right3.length())) / 2; // to
                                                                                                                       // give
                                                                                                                       // dynamic
-                                System.out.println("| " + left3 + " ".repeat(spaceBetween3 - 1) + center3
+                                System.out.println("\t\t| " + left3 + " ".repeat(spaceBetween3 - 1) + center3
                                         + " ".repeat(spaceBetween3 - 2) + right3 + "|");
-                                System.out.println("|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
 
                                 do {
                                     System.out.print("Enter Your choice: ");
