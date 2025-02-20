@@ -465,7 +465,7 @@ class MainPage {
                     sc.nextLine();
                     System.out.println();
                     break;
-                case "&": // to search a p
+                case "&": // to search a post
                     sc.nextLine();
                     System.out.print("Enter Link: ");
                     String search = sc.nextLine().trim();
@@ -490,9 +490,7 @@ class MainPage {
                                 System.out.println("\t\t|                                     |");
 
                                 int contentWidth = 38; // Space for padding and borders
-                                String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of
-                                                                                                    // post and storring
-                                                                                                    // in an array
+                                String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of post and storring in an array
                                 StringBuffer line = new StringBuffer("\t\t|");
 
                                 for (int k = 0; k < words.length; k++) {
