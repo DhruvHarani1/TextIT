@@ -338,7 +338,7 @@ class MainPage {
             } while (allUser[randomUser].P[randomPost] == null && allUser[randomUser].firstTimeAppUsed != 0);
 
             // Design is modified and tested here(Vraj)..
-            if (allUser[randomUser].P[randomPost] == null) { // if the chossen number(random) post is not available then // this message is shown
+            if (loggedUser.firstTimeAppUsed==0) { // if the chossen number(random) post is not available then // this message is shown
                 displayLogo();
                 System.out.println("|Hi, Welcome to TextIT\t\t|");
                 System.out.println("|Lets Start by posting\t\t|");
@@ -837,4 +837,3 @@ class Profile {
             System.out.println(line + "|");
     }
 }
-
