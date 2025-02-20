@@ -474,9 +474,7 @@ class MainPage extends Designs {
                                 System.out.println("\t\t|                                     |");
 
                                 int contentWidth = 38; // Space for padding and borders
-                                String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of
-                                                                                                    // post and storring
-                                                                                                    // in an array
+                                String[] words = allUser[randomUser].P[randomPost].post.split(" "); // spliting words of post and storring in an array
                                 StringBuffer line = new StringBuffer("\t\t|");
 
                                 for (int k = 0; k < words.length; k++) {
@@ -500,27 +498,11 @@ class MainPage extends Designs {
                                 }
                                 System.out.println(line + " |");
 
-                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
-                                String left = allUser[randomUser].P[randomPost].likecount + " Like(*)"; // to show like
-                                                                                                        // option
-                                String center = "Comment(#)"; // to show comment option
-                                String right = allUser[randomUser].followCount + " Follow(@)"; // to show follow option
-                                int spaceBetween1 = (40 - (left.length() + center.length() + right.length())) / 2; // spacing
-                                                                                                                   // between
-                                                                                                                   // the
-                                System.out.println("\t\t| " + left + " ".repeat(spaceBetween1 - 1) + center
-                                        + " ".repeat(spaceBetween1) + "\b\b\b" + right + "|");
-                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                                //for option of like, comment and follow
+                                mainPageOptions(allUser[randomUser].P[randomPost].likecount + " Like(*)", "Comment(#)", " " + allUser[randomUser].followCount + " Follow(@)");
 
-                                String left3 = ""; // Exit option to exit the main page
-                                String center3 = "Back(^)"; // add Share option to share a post
-                                String right3 = ""; // search option to search a post
-                                int spaceBetween3 = (40 - (left3.length() + center3.length() + right3.length())) / 2; // to
-                                                                                                                      // give
-                                                                                                                      // dynamic
-                                System.out.println("\t\t| " + left3 + " ".repeat(spaceBetween3 - 1) + center3
-                                        + " ".repeat(spaceBetween3 - 2) + right3 + "|");
-                                System.out.println("\t\t|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|");
+                                //for option of go back
+                                mainPageOptions("", "Back(^)", "");
 
                                 do {
                                     System.out.print("Enter Your choice: ");
@@ -785,8 +767,6 @@ class Profile {
 
             choice = sc.nextLine();
             switch (choice) {
-                // case 1:
-                // break;
                 case "@":
                     System.out.print("Enter Name: ");
                     loggedUser.goodname = sc.nextLine();
